@@ -42,11 +42,6 @@ class Bookings
      */
     private $cars;
 
-    /**
-     * @ORM\Column(type="float")
-     */
-    private $total;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -112,15 +107,4 @@ class Bookings
         return $this;
     }
 
-    public function getTotal(): ?float
-    {
-        return $this->total;
-    }
-
-    public function setTotal(float $total): self
-    {
-        $this->total = $total;
-
-        return $this;
-    }
 }
