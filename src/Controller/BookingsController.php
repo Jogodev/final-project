@@ -23,8 +23,9 @@ class BookingsController extends AbstractController
 // }
 
 {
-    #[Route('/bookings', name: 'new_booking')]
-    public function newBooking(Request $request, EntityManagerInterface $manager): Response
+    #[Route('/bookings', name: 'new_booking')]    
+   
+    public function newBooking(Request $request, EntityManagerInterface $em, /*Cars $car*/): Response
     {
         $booking = new Bookings();
         $bookingForm = $this->createForm(BookingsType::class, $booking);
@@ -34,19 +35,19 @@ class BookingsController extends AbstractController
         if ($bookingForm->isSubmitted() && $bookingForm->isValid()) {
 
             $user = $this->getUser();
-
+            
             $booking->setUser($user);
                 //->setCars($car);
 
-            $manager->persist($booking);
-            $manager->flush();
+            $em->persist($booking);
+            $em->flush();
 
             $this->addFlash('success', 'La réservation a bien été prise en compte!');
         }
 
         return $this->render('bookings/new.html.twig', [
             'bookingForm' => $bookingForm->createView(),
-            
+            //'car' => $car,          
         ]);
     }
 }
