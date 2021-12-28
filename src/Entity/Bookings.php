@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\BookingsRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -105,6 +106,13 @@ class Bookings
         $this->cars = $cars;
 
         return $this;
+    }
+
+    public function addDate()
+    {
+        if(empty($this->createdAt))
+        $this->createdAt = new DateTime();
+        
     }
 
 }
