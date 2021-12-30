@@ -8,6 +8,7 @@ use App\Entity\Categories;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,26 +19,15 @@ class BookingsType extends AbstractType
     {
         $builder
 
-            // ->add('categories', ChoiceType::class,[
-            //     'label' => 'Categories',
-            //     'attr' => [ 'class' => 'form-control sm-3'],
-            //     'choices' => [
-            //         new Categories(Categories::)
-            //     ],
-            // ])
-            ->add('cars', ChoiceType::class, [
+
+            ->add('cars', EntityType::class, [
                 'label' => 'Vehicule',
                 'attr' => ['class' => 'form-control'],
-                'choices' => [
-                    'Categories' => ['Voitures'=> [
-                            
-                    ], 'Utilitaires'=> [
+                'class' => Cars::class,
+                'choice_label' => 'title',
 
-                    ]],
-
-                ],
-                
             ])
+
             ->add('startDate', DateType::class, [
                 'label' => 'Date de retrait',
                 'required' => 'true',
@@ -54,10 +44,13 @@ class BookingsType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'form-control js-datepicker'
+                    'class' => 'form-control g-col-6 js-datepicker'
                 ],
             ])
-            ->add('Valider', SubmitType::class);
+            ->add('Valider', SubmitType::class,[
+                'attr' => ['class'=>'btn btn-primary btn-lg',]
+                
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

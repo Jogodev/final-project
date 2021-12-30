@@ -15,4 +15,12 @@ class UsersController extends AbstractController
             'controller_name' => 'UsersController',
         ]);
     }
+
+    // #[Route('/users', name: 'users')]
+    // public function index(): Response
+    // {
+    //     return $this->render('users/index.html.twig', [
+    //         'controller_name' => 'UsersController',
+    //     ]);
+    // }
 }

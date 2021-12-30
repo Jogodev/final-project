@@ -3,8 +3,20 @@
 {% block title %}New{% endblock %}
 
 {% block body %}
+<h1 class="text-center">Réserver votre véhicule</h1>
 
-{{ form(bookingForm) }}
+
+<div class="container">
+
+    {{form_start(bookingForm)}}
+
+
+
+    {{form_end(bookingForm)}}
+</div>
+
+
+
 
 
 {% endblock %}
