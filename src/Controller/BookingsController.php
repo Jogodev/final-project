@@ -47,12 +47,12 @@ class BookingsController extends AbstractController
         $bookingForm->handleRequest($request);
 
         if ($bookingForm->isSubmitted() && $bookingForm->isValid()) {
-
+            
+            //On récupère le user
             $user = $this->getUser();
-            
-            
+
             $booking->setUser($user)
-                    ->setCreatedAt(new DateTime())
+                    ->setCreatedAt(new \DateTime())
                     ->setCars($car);
 
             $em->persist($booking);
