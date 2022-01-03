@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SaleController!{% endblock %}
+
+{% block body %}
+
+<div class="row row-cols-1 row-cols-md-3">
+    {% for sale in sales %}
+    <div class="col mb-4">
+        <div class="card">
+            <img src="/uploads/{{ sale.image }}" class="card-img-top" alt="Photo du modèle de la voiture">
+            <div class="card-body">
+                <h5 class="card-title">{{ sale.title }}</h5>
+                <p class="card-text">{{ sale.description|striptags }}</p>
+                <a href="/" class="btn btn-primary">Plus d'information</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
