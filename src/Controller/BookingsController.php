@@ -6,7 +6,8 @@ use App\Form\BookingsType;
 use App\Entity\Bookings;
 use App\Entity\Cars;
 use App\Repository\CarsRepository;
-use Datetime;
+use App\Repository\CategoriesRepository;
+use App\Services\BookingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,10 +30,11 @@ class BookingsController extends AbstractController
 
 
     #[Route('/bookings', name: 'bookings')]
-    public function index(CarsRepository $cars): Response
+    public function index(BookingService $bookingService): Response
     {
-        return $this->render('bookings/new.html.twig', [
-            'car' => $cars->findAll(),
+        return $this->render('bookings/index.html.twig', [
+            'car' => $bookingService->carslist(),
+            'categories' => $bookingService->categorieslist(),
         ]);
     }
 
@@ -58,7 +60,7 @@ class BookingsController extends AbstractController
             $em->persist($booking);
             $em->flush();
 
-            $this->addFlash('success', 'La réservation a bien été prise en compte!');
+            
         }
 
         return $this->render('bookings/new.html.twig', [

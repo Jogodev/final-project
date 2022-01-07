@@ -13,7 +13,15 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookingsType extends AbstractType
-{
+{    
+    /**
+     * Method buildForm
+     *
+     * @param FormBuilderInterface $builder [explicite description]
+     * @param array $options [explicite description]
+     *
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

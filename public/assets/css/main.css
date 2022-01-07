@@ -1,0 +1,31 @@
+
+
+
+
+#page-contact{
+    
+    
+}
+input, textarea, select {
+    box-shadow:5px 5px 10px #c2bfbf;
+    }
+    input[type=submit] , button[type=button]{
+        background-color: #740505;
+        color: #ddd;
+        font-size: larger;
+        font-weight: 800;
+    }
+input[type=submit]:hover , button[type=button]:hover{
+    background-color: #740505;
+    color: #ddd;
+    font-size: x-large;
+    font-weight: 850;
+
+}
+input[type=submit]:active , button[type=button]:active{
+    background-color: rgb(83, 4, 4);
+
+}
+button[type=button2]:hover{
+    font-size: x-large;
+} 
