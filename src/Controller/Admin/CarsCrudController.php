@@ -28,7 +28,7 @@ class CarsCrudController extends AbstractCrudController
             TextEditorField::new('content'),
             MoneyField::new('price')->setCurrency('EUR'),
             ImageField::new('image')
-                ->setUploadDir('/public/uploads')
+                ->setUploadDir('/public/uploads/images/cars')
                 ->setRequired(false)
                 ->setBasePath('/uploads'),
         ];

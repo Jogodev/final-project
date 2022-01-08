@@ -4,14 +4,14 @@ namespace App\DataFixtures;
 
 use App\Entity\Users;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Symfony\Component\Security\Core\hash\UserPasswordhashInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UsersFixtures extends Fixture
+class UsersFixtures extends Fixture implements DependentFixtureInterface
 {
-
     private $hash;
 
     public function __construct(UserPasswordHasherInterface $hash)
@@ -37,8 +37,19 @@ class UsersFixtures extends Fixture
             $user->setFirstname($faker->firstname);
             $user->setIsVerified($faker->numberBetween(0, 1));
             $manager->persist($user);
+
+            //Enregistre le user dans une reference
+            $this->addReference('user_' . $users, $user);
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            CategoriesFixtures::class,
+            CarsFixtures::class,
+        ];
     }
 }

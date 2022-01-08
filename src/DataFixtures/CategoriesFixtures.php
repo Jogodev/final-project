@@ -5,7 +5,7 @@ use App\Entity\Categories;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class CategoriesFixtures extends Fixture
+class CategoriesFixtures extends Fixture 
 {
 
     //Je crée un tableau pour mes data fictives
@@ -16,10 +16,10 @@ class CategoriesFixtures extends Fixture
                 'name' => 'Tourisme',
             ],
             2 => [
-                'name' => 'sportive',
+                'name' => 'Sportive',
             ],
             3 => [
-                'name' => 'utilitaires',
+                'name' => 'Utilitaires',
             ],
 
         ];
@@ -29,6 +29,9 @@ class CategoriesFixtures extends Fixture
             $categorie = new Categories();
             $categorie->setName($value['name']);
             $manager->persist($categorie);
+
+            //Enregistre la categorie dans une reference et la clé nous permettra de la rappeler sans passé par la bdd
+            $this->addReference('categorie_' . $key, $categorie);
         }
 
             $manager->flush();
