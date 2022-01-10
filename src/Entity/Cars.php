@@ -49,6 +49,11 @@ class Cars
      */
     private $bookings;
 
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $energy;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -154,5 +159,17 @@ class Cars
     public function __toString(): string
     {
         return $this->title;
+    }
+
+    public function getEnergy(): ?string
+    {
+        return $this->energy;
+    }
+
+    public function setEnergy(string $energy): self
+    {
+        $this->energy = $energy;
+
+        return $this;
     }
 }

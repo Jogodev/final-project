@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 
 class CarsCrudController extends AbstractCrudController
 {
@@ -31,6 +32,7 @@ class CarsCrudController extends AbstractCrudController
                 ->setUploadDir('/public/uploads/images/cars')
                 ->setRequired(false)
                 ->setBasePath('/uploads'),
+            ArrayField::new('Propriétés')
         ];
     }
 }

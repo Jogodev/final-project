@@ -25,6 +25,7 @@ class UsersCrudController extends AbstractCrudController
             ChoiceField::new('roles', 'Roles')->allowMultipleChoices()
             ->autocomplete()
             ->setChoices(["Administrateur" => 'ROLE_ADMIN', "Utilisateur" => 'ROLE_USER', "Redacteur"=>"ROLE_REDACTEUR"]),
+            
         ];
     }
     

@@ -7,19 +7,12 @@
 
 
 <div class="container">
-{% for category in categories %}
     <select class="custom-select" size="3">
-        <option selected>Open this select menu</option>
+        {% for category in categories %}
         <option value="1">{{category.name}}</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-{% endfor %}
-    {{form_start(bookingForm)}}
+        {% endfor %}
+    </select>
 
-
-
-    {{form_end(bookingForm)}}
 </div>
 
 

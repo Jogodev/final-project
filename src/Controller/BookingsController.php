@@ -41,7 +41,7 @@ class BookingsController extends AbstractController
     #[Route('/bookings/{car}', name: 'new_booking')]    
         
     
-    public function newBooking(Request $request, EntityManagerInterface $em, Cars $car): Response
+    public function newBooking(Request $request, EntityManagerInterface $em, Cars $car, BookingService $bookingService): Response
     {
         $booking = new Bookings();
         $bookingForm = $this->createForm(BookingsType::class, $booking);
@@ -65,7 +65,8 @@ class BookingsController extends AbstractController
 
         return $this->render('bookings/new.html.twig', [
             'bookingForm' => $bookingForm->createView(),
-            'car' => $car,          
+            'car' => $car,
+            'categories' => $bookingService->categorieslist(),          
         ]);
     }
 }
