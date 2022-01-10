@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BookingsRepository;
 use DateTime;
+use Date;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -107,12 +108,15 @@ class Bookings
 
         return $this;
     }
-
-    public function addDate()
+    
+    /**
+     * Method bookingDays
+     *  Permet de récuperer le nombre de jours d'une location 
+     * @return void
+     */
+    public function bookingDays()
     {
-        if(empty($this->createdAt))
-        $this->createdAt = new DateTime();
-        
+        $diffdays = $this->startDate->diff($this->endDate);
+        return $diffdays->days;
     }
-
 }

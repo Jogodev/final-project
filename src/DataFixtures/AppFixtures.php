@@ -6,6 +6,7 @@ use App\Entity\Users;
 use App\Entity\Cars;
 use App\Entity\Categories;
 use App\Entity\Sales;
+use App\Entity\Bookings;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -66,36 +67,49 @@ class AppFixtures extends Fixture
             $car->setEnergy($faker->vehicleFuelType);
 
             $manager->persist($car);
+            $this->addReference('car_' . $cars, $car);
         }
-            for ($users = 1; $users <= 10; $users++) {
-                $user = new Users();               
-                //le 1er user a le role admin
-                if ($users === 1) {
-                    $user->setRoles(['ROLE_ADMIN']);
-                    $user->setEmail('jonathan.plastivene@gmail.com');
-                } else {
-                    $user->setRoles(['ROLE_USER']);
-                    $user->setEmail($faker->email);
-                }
-                
-                $user->setPassword($this->hash->hashPassword($user, '1234'));
-                $user->setLastname($faker->lastname);
-                $user->setFirstname($faker->firstname);
-                $user->setIsVerified($faker->numberBetween(0, 1));
-                $manager->persist($user);
+        for ($users = 1; $users <= 10; $users++) {
+            $user = new Users();
+            //le 1er user a le role admin
+            if ($users === 1) {
+                $user->setRoles(['ROLE_ADMIN']);
+                $user->setEmail('jonathan.plastivene@gmail.com');
+            } else {
+                $user->setRoles(['ROLE_USER']);
+                $user->setEmail($faker->email);
             }
 
-            for($sales = 1; $sales <= 15; $sales++) 
-            {
-                $sale = new Sales();
-                $sale->setTitle($faker->vehicle);
-                $sale->setImage("public/uploads/images/merco.jpg");
-                $sale->setPrice($faker->randomFloat(2, 5000, 15000));
-                $sale->setDescription($faker->text(30));
-                $manager->persist($sale);
+            $user->setPassword($this->hash->hashPassword($user, '1234'));
+            $user->setLastname($faker->lastname);
+            $user->setFirstname($faker->firstname);
+            $user->setIsVerified($faker->numberBetween(0, 1));
+            $manager->persist($user);
 
-            }
-        
+            $this->addReference('user_' . $users, $user);
+        }
+
+        for ($sales = 1; $sales <= 15; $sales++) {
+            $sale = new Sales();
+            $sale->setTitle($faker->vehicle);
+            $sale->setImage("public/uploads/images/merco.jpg");
+            $sale->setPrice($faker->randomFloat(2, 5000, 15000));
+            $sale->setDescription($faker->text(30));
+            $manager->persist($sale);
+        }
+
+        for ($bookings = 1; $bookings <= 10; $bookings++) {
+            $car = $this->getReference(('car_' . $faker->numberBetween(1, 30)));
+            $user = $this->getReference(('user_' . $faker->numberBetween(1, 10)));
+            $booking = new Bookings();
+            $booking->setUser($user);
+            $booking->setCars($car);
+            $booking->setCreatedAt($faker->dateTime());
+            $booking->setStartDate($faker->dateTime());
+            $booking->setEndDate($faker->dateTime());
+            $manager->persist($booking);
+        }
+
         $manager->flush();
     }
 }

@@ -27,4 +27,6 @@ class BookingService
         $categorieslist = $this->em->getRepository(Categories::class)->findAll();
         return $categorieslist;
     }
+
+    
 }

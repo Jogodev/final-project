@@ -29,10 +29,10 @@ class CarsCrudController extends AbstractCrudController
             TextEditorField::new('content'),
             MoneyField::new('price')->setCurrency('EUR'),
             ImageField::new('image')
-                ->setUploadDir('/public/uploads/images/cars')
+                ->setUploadDir('/public/uploads/images')
                 ->setRequired(false)
                 ->setBasePath('/uploads'),
-            ArrayField::new('Propriétés')
+           
         ];
     }
 }
