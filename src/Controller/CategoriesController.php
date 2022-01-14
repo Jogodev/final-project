@@ -23,4 +23,34 @@ class CategoriesController extends AbstractController
             'categories' => $categories->findAll(),
         ]);
     }
+
+    // if ($bookingForm->isSubmitted() && $bookingForm->isValid()) {
+
+    //     //On récupère le user
+    //     $user = $this->getUser();
+
+    //     $booking->setUser($user)
+    //             ->setCreatedAt(new \DateTime())
+    //             ->setCars($car);
+    //     $conditionDate = false;
+        
+    //     $date = $repos->findBy[
+    //             [
+    //             'startDate' > $bookingForm->getData('date'),
+    //             'endDate' < $bookingForm->getData('date')
+    //             ]
+    //         ];
+    //     for($i = 0; $i < count($date); $i++){
+    //         if($date[i]['car'] == $car){
+    //             $conditionDate = true;
+    //         }
+    //     }
+    //     if($conditionDate == true){
+    //       // message d'erreur
+    //     }
+    //   else {
+    //     $em->persist($booking);
+    //     $em->flush();
+    //   }
+    // }
 }

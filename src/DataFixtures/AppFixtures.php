@@ -63,7 +63,7 @@ class AppFixtures extends Fixture
             }
             $car->setTitle($faker->vehicle);
             $car->setContent($faker->words(5, true));
-            $car->setImage('public/uploads/images/golf.jpg');
+            $car->setImage('/uploads/images/golf.jpg');
             $car->setEnergy($faker->vehicleFuelType);
 
             $manager->persist($car);
@@ -71,7 +71,7 @@ class AppFixtures extends Fixture
         }
         for ($users = 1; $users <= 10; $users++) {
             $user = new Users();
-            //le 1er user a le role admin
+            //le 1er user a le role admin 
             if ($users === 1) {
                 $user->setRoles(['ROLE_ADMIN']);
                 $user->setEmail('jonathan.plastivene@gmail.com');
@@ -92,7 +92,7 @@ class AppFixtures extends Fixture
         for ($sales = 1; $sales <= 15; $sales++) {
             $sale = new Sales();
             $sale->setTitle($faker->vehicle);
-            $sale->setImage("public/uploads/images/merco.jpg");
+            $sale->setImage("/uploads/images/merco.jpg");
             $sale->setPrice($faker->randomFloat(2, 5000, 15000));
             $sale->setDescription($faker->text(30));
             $manager->persist($sale);

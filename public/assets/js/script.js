@@ -1,8 +1,10 @@
+
+
 <script>
 		$(document).ready(function () {			
 			$('.js-datepicker').datepicker({
 				
-				format: "yyyy-mm-dd"//"dd/mm/yyyy"
+				format: "dd/mm/yyyy"
 			});
 		});
 	</script>

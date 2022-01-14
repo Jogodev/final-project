@@ -27,14 +27,6 @@ class BookingsType extends AbstractType
         $builder
 
 
-            ->add('cars', EntityType::class, [
-                'label' => 'Vehicule',
-                'attr' => ['class' => 'form-control'],
-                'class' => Cars::class,
-                'choice_label' => 'title',
-
-            ])
-
             ->add('startDate', DateType::class, [
                 'label' => 'Date de retrait',
                 'required' => 'true',
@@ -51,12 +43,8 @@ class BookingsType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'form-control g-col-6 js-datepicker'
+                    'class' => 'form-control js-datepicker'
                 ],
-            ])
-            ->add('Valider', SubmitType::class,[
-                'attr' => ['class'=>'btn btn-primary btn-lg',]
-                
             ]);
     }
 

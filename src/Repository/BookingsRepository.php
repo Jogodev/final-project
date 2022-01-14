@@ -19,22 +19,24 @@ class BookingsRepository extends ServiceEntityRepository
         parent::__construct($registry, Bookings::class);
     }
 
-    // /**
-    //  * @return Bookings[] Returns an array of Bookings objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Bookings[] Returns an array of Bookings objects
+     */
+    
+    public function findByDate(int $car, $date1, $date2): ?Bookings
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
+        $query = $this->createQueryBuilder('b')
+            ->andWhere('b.cars = :val')
+            ->andWhere('b.startDate >= $date1')
+            ->andWhere('b.endDate <= $date2')
             ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
+           
         ;
+        dd($query);
+        //return $compare == null ? null: $compare;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Bookings

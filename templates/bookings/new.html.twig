@@ -5,13 +5,22 @@
 {% block body %}
 <h1 class="text-center">Réserver votre véhicule</h1>
 
+<h3 class="text-center">Réserver la {{car.title}}</h3>
 
-<div class="container">
-    <select class="custom-select" size="3">
-        {% for category in categories %}
-        <option value="1">{{category.name}}</option>
-        {% endfor %}
-    </select>
+
+<div class="container mt-4">
+    {{ form_start(bookingForm)}}
+    <div class="form-group">
+    </div>
+    <div class="">
+        {{ form_row(bookingForm.startDate)}}
+
+    </div>
+    <div class="">{{ form_row(bookingForm.endDate)}}</div>
+    <div class="">
+        <button class="btn btn-primary">Valider</button>
+    </div>
+    <div class="">{{ form_end(bookingForm)}}</div>
 
 </div>
 
