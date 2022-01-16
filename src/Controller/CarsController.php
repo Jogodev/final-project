@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Services\BookingService;
+use App\Repository\BookingsRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,23 +15,30 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CarsController extends AbstractController
 {
-    
+
     /**
      * bs
      *
      * @var BookingService
      */
     private $bs;
+    /**
+     * bookingsRepository
+     *
+     * @var BookingsRepository
+     */
+    private $br;
 
-    public function __construct(BookingService $bs)
+    public function __construct(BookingService $bs, BookingsRepository $br)
     {
         $this->bs = $bs;
+        $this->br = $br;
     }
 
 
 
 
-    #[Route('/cars', name: 'cars')]    
+    #[Route('/cars', name: 'cars')]
     /**
      * Method index affiche tout les vehicules
      *
@@ -42,7 +50,7 @@ class CarsController extends AbstractController
     {
         $cars = $paginator->paginate(
             $this->bs->carsList(),
-            $request->query->getInt('page',1),
+            $request->query->getInt('page', 1),
             6
         );
         return $this->render('cars/index.html.twig', [
@@ -52,7 +60,7 @@ class CarsController extends AbstractController
         ]);
     }
 
-    #[Route('/cars/{categId}', name: 'carsbycateg')]    
+    #[Route('/cars/{categId}', name: 'carsbycateg')]
     /**
      * Permet d'afficher les vehicule selon la categorie choisi
      *
@@ -62,16 +70,17 @@ class CarsController extends AbstractController
      */
     public function carsByCateg(PaginatorInterface $paginator, Request $request, int $categId): Response
     {
-        // $categories = $paginator->paginate(
-        //     $this->bs->carsList(),
-        //     $request->query->getInt('page',1),
-        //     6
-        // );
-        
+        $cars = $paginator->paginate(
+            $this->bs->carsList($categId),
+            $request->query->getInt('page', 1),
+            6
+        );
+
         return $this->render('cars/index.html.twig', [
-            'cars'=> $this->bs->carsList($categId),
+            'cars' => $cars,
+            'carscateg' => $this->bs->carsList($categId),
             'categories' => $this->bs->categoriesList(),
-            //'bookings' => $this->bs->bookingsList()          
+
         ]);
     }
 
