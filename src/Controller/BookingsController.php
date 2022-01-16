@@ -15,32 +15,49 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BookingsController extends AbstractController
 
-// {
-//     #[Route('/bookings', name: 'bookings')]
-//     public function index(): Response
-//     {
-//         return $this->render('bookings/index.html.twig', [
-//             'controller_name' => 'BookingsController',
-//         ]);
-//     }
-// }
-
 {
+    
+    /**
+     * em
+     *
+     * @var EntityManagerInterface
+     */
+    private $em;    
+    /**
+     * bs
+     *
+     * @var BookingService
+     */
+    private $bs;    
+    /**
+     * br
+     *
+     * @var BookingsRepository
+     */
+    private $br;
+
+
+    public function __construct(EntityManagerInterface $em, BookingService $bs, BookingsRepository $br)
+    {
+        $this->em = $em;
+        $this->bs = $bs;
+        $this->br = $br;
+    }
 
 
     #[Route('/bookings', name: 'bookings')]
-    public function index(BookingService $bookingService): Response
+    public function index(): Response
     {
         return $this->render('bookings/index.html.twig', [
-            'car' => $bookingService->carslist(),
-            'categories' => $bookingService->categorieslist(),
+            'car' => $this->bs->carslist(),
+            'categories' => $this->bs->categorieslist(),
         ]);
     }
 
     #[Route('/bookings/{car}', name: 'new_booking')]
 
 
-    public function newBooking(Request $request, EntityManagerInterface $em, Cars $car, BookingService $bookingService, BookingsRepository $repos): Response
+    public function newBooking(Request $request, Cars $car): Response
     {
         $booking = new Bookings();
         $bookingForm = $this->createForm(BookingsType::class, $booking);
@@ -56,14 +73,14 @@ class BookingsController extends AbstractController
                 ->setCreatedAt(new \DateTime())
                 ->setCars($car);
 
-            $em->persist($booking);
-            $em->flush();
+            $this->em->persist($booking);
+            $this->em->flush();
         }
 
         return $this->render('bookings/new.html.twig', [
             'bookingForm' => $bookingForm->createView(),
             'car' => $car,
-            'categories' => $bookingService->categorieslist(),
+            'categories' => $this->bs->categorieslist(),
         ]);
     }
 }
