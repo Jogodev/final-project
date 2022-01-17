@@ -56,7 +56,7 @@ class CarsController extends AbstractController
         return $this->render('cars/index.html.twig', [
             'cars' => $cars,
             'categories' => $this->bs->categoriesList(),
-            // 'bookings' => $this->bs->bookingsList(),
+            
         ]);
     }
 
@@ -92,11 +92,5 @@ class CarsController extends AbstractController
     //     ]);
     // }
 
-    // #[Route('/cars', name: 'cars')]
-    // public function index(CarsRepository $cars): Response
-    // {
-    //     return $this->render('cars/index.html.twig', [
-    //         'car' => $cars->findAll(),
-    //     ]);
-    // }
+
 }

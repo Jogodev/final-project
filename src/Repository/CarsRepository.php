@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Cars;
+use App\Entity\BookingSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,11 +21,19 @@ class CarsRepository extends ServiceEntityRepository
         parent::__construct($registry, Cars::class);
     }
 
+
+    public function findByQuery(BookingSearch $search):Query
+    {
+        $query = $this->createQueryBuilder('c')
+            ->orderBy('c.price', 'ASC');
+        return $query->getQuery();
+    }
+
     // /**
     //  * @return Cars[] Returns an array of Cars objects
     //  */
     /*
-    public function findByExampleField($value)
+    public function findByQuery($value)
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')

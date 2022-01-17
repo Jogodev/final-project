@@ -15,34 +15,43 @@ class BookingSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('car', TextType::class, [
-                'required'=> false,
+            // ->add('car', TextType::class, [
+            //     'required'=> false,
+            //     'label' => false,
+            //     'attr' => [
+            //         'placeholder'=>'Rechercher un modèle',
+            //         'class' => 'form-control',
+            //     ]
+            // ])
+            ->add('category', ChoiceType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
-                    'placeholder'=>'Rechercher un modèle',
-                ]
-            ])
-            ->add('categories', ChoiceType::class, [
-                'choices'=> [
-                    'Essence' => 'gas',
-                    'Diesel' => 'diesel',
-                    'Hybride' => 'Hybrid',
-                    'Electrique' => 'electric',
+                    'placeholder' => 'Categorie',
+                    'class' => 'form-control',
+
                 ],
-                'expanded'=> true,
-                'multiple'=> true,
+                'choices'=> [
+                    'Tourisme' => 'tourisme',
+                    'Sportive' => 'sportive',
+                    'Utilitaire' => 'utilitaires',
+                    
+                ],
             ])
             ->add('maxPrice', IntegerType::class, [
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Prix max'
+                    'placeholder' => 'Prix max',
+                    'class' => 'form-control',
+
                 ]
             ])
             ->add('energy', ChoiceType::class, [
                 'label'=> false,
                 'attr'=>[
-                    'placeholder' => 'Carburant'
+                    'placeholder' => 'Carburant',
+                    'class' => 'form-control'
                 ],
                 'choices'=> [
                     'Essence' => 'gas',
@@ -50,8 +59,6 @@ class BookingSearchType extends AbstractType
                     'Hybride' => 'Hybrid',
                     'Electrique' => 'electric',
                 ],
-                'expanded'=> true,
-                'multiple'=> true,
             ])
         ;
     }

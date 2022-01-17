@@ -4,12 +4,50 @@
 
 {% block body %}
 
+<div class="jumbotron">
+    <div class="container">
+        {{ form_start(formSearch) }}
+        <div class="form-row">
+            <div class="col">
+                {{ form_row(formSearch.category) }}
+            </div>
+            <div class="col">
+                {{ form_row(formSearch.maxPrice) }}
+            </div>
+            <div class="col">
+                {{ form_row(formSearch.energy) }}
+            </div>
+            <button class="btn btn-dark">Rechercher</button>
+        </div>
+        {{ form_end(formSearch) }}
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% for message in app.flashes('message') %}
 <div class="alert alert-success" role="alert">
     {{message}}
 </div>
 {% endfor %}
 <h1>Nous contacter</h1>
-    
+
 
 {% endblock %}
