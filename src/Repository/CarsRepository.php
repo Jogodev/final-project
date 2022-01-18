@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Cars;
+use App\Entity\Categories;
 use App\Entity\BookingSearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
@@ -22,10 +23,24 @@ class CarsRepository extends ServiceEntityRepository
     }
 
 
-    public function findByQuery(BookingSearch $search):Query
+    public function findByQuery(BookingSearch $search): Query
     {
         $query = $this->createQueryBuilder('c')
             ->orderBy('c.price', 'ASC');
+
+        if ($search->getMaxPrice()) {
+            $query = $query->andWhere('c.price <= :maxPrice')
+                ->setParameter('maxPrice', $search->getMaxPrice());
+        }
+        if ($search->getCategories()) {
+            $query = $query->andWhere('c.categories = :category')
+                ->setParameter('category', $search->getCategories());
+        }
+        if ($search->getEnergy()) {
+            $query = $query->andWhere('c.energy = :energy')
+                ->setParameter('energy', $search->getEnergy());
+        }
+        
         return $query->getQuery();
     }
 

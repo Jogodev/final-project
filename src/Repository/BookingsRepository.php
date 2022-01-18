@@ -23,15 +23,18 @@ class BookingsRepository extends ServiceEntityRepository
      * @return Bookings[] Returns an array of Bookings objects
      */
     
-    public function findByDate(int $car, $date1, $date2): ?Bookings
+    public function findByDate(int $car, $startdate, $enddate): ?Bookings
     {
         $query = $this->createQueryBuilder('b')
-            ->andWhere('b.cars = :val')
-            ->andWhere('b.startDate >= $date1')
-            ->andWhere('b.endDate <= $date2')
-            ->setParameter('val', $value)
+            ->andWhere('b.cars_id = :cars')
+            ->setParameter('cars',$car)
+            ->andWhere('b.start_date >= :startDate')
+            ->setParameter('startDate', $startdate)
+            ->andWhere('b.end_date <= :endDate')
+            ->setParameter('enddate', $enddate)
             ->getQuery()
-           
+            ->getResult();
+        
         ;
         dd($query);
         //return $compare == null ? null: $compare;

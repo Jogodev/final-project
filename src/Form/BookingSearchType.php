@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\BookingSearch;
+use App\Entity\Categories;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,19 +25,15 @@ class BookingSearchType extends AbstractType
             //         'class' => 'form-control',
             //     ]
             // ])
-            ->add('category', ChoiceType::class, [
+            ->add('categories', EntityType::class, [
                 'label' => false,
                 'required' => false,
+                'class' => Categories::class,
+                
+                
                 'attr' => [
                     'placeholder' => 'Categorie',
-                    'class' => 'form-control',
-
-                ],
-                'choices'=> [
-                    'Tourisme' => 'tourisme',
-                    'Sportive' => 'sportive',
-                    'Utilitaire' => 'utilitaires',
-                    
+                    'class' => 'form-control'
                 ],
             ])
             ->add('maxPrice', IntegerType::class, [
@@ -43,13 +41,13 @@ class BookingSearchType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Prix max',
-                    'class' => 'form-control',
-
-                ]
+                    'class' => 'form-control'
+                ],
             ])
             ->add('energy', ChoiceType::class, [
+                'required' => false,
                 'label'=> false,
-                'attr'=>[
+                'attr' => [
                     'placeholder' => 'Carburant',
                     'class' => 'form-control'
                 ],
@@ -70,5 +68,10 @@ class BookingSearchType extends AbstractType
             'method' => 'get',
             '_csrf_token' => false,
         ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }

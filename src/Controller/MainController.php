@@ -27,7 +27,15 @@ class MainController extends AbstractController
     }
 
 
-    #[Route('/', name: 'home')]
+    #[Route('/', name: 'home')]    
+    /**
+     * Permet de trouver une voiture a louer a partir d'une recherche
+     *
+     * @param PaginatorInterface $paginator [Pagination des voiture issues de la recherche]
+     * @param Request $request [explicite description]
+     *
+     * @return Response
+     */
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
         $search = new BookingSearch();
@@ -37,7 +45,7 @@ class MainController extends AbstractController
         $cars = $paginator->paginate(
             $this->cars->findByQuery($search),
             $request->query->getInt('page', 1),
-            6
+            3
         );
 
         return $this->render('main/index.html.twig', [

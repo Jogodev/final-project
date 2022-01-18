@@ -1,6 +1,8 @@
 <?php
 namespace App\Entity;
 
+use App\Entity\Categories;
+
 class BookingSearch{
 
 /**
@@ -16,7 +18,7 @@ private $energy;
 /**
  * @var string|null
  */
-private $category;
+private $categories;
 
 /**
  * @var int|null
@@ -50,29 +52,6 @@ $this->energy = $energy;
 return $this;
 }
 
-/**
- * Get the value of category
- *
- * @return  string|null
- */ 
-public function getCategory()
-{
-return $this->category;
-}
-
-/**
- * Set the value of category
- *
- * @param  string|null  $category
- *
- * @return  self
- */ 
-public function setCategory($category)
-{
-$this->category = $category;
-
-return $this;
-}
 
 /**
  * Get the value of maxPrice
@@ -118,6 +97,30 @@ return $this->car;
 public function setCar($car)
 {
 $this->car = $car;
+
+return $this;
+}
+
+/**
+ * Get the value of categories
+ *
+ * @return  string|null
+ */ 
+public function getCategories()
+{
+return $this->categories;
+}
+
+/**
+ * Set the value of categories
+ *
+ * @param  string|null  $categories
+ *
+ * @return  self
+ */ 
+public function setCategories($categories)
+{
+$this->categories = $categories;
 
 return $this;
 }

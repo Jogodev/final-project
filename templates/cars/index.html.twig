@@ -8,21 +8,57 @@
 <a href="/cars/{{category.id}}">{{category.name}}</a>
 {% endfor %}
 
+
+{% if is_granted('ROLE_USER') %}
 <div class="row row-cols-1 row-cols-md-3">
     {% for car in cars %}
     <div class="col mb-4">
         <div class="card">
             <img src="{{car.image}}" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">{{car.title}}</h5>
-                <p class="card-text">{{car.content}}</p>
-                <p class="card-text">{{car.price}}€ par jour</p>
+            <h3 class="card-title">{{car.title}}</h3>
+            <h4 class="card-text">{{car.categories}}</h4>
+            <h5 class="card-text">{{car.energy}}</h5>
+            <p class="card-descrition">{{car.content}}</p>
+            <p class="card-text">{{car.price}} € par jour</p>
                 <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
+{% else %}
+<div class="row row-cols-1 row-cols-md-3">
+    {% for car in cars %}
+    <div class="col mb-4">
+        <div class="card">
+            <img src="{{car.image}}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h3 class="card-title">{{car.title}}</h3>
+            <h4 class="card-text">{{car.categories}}</h4>
+            <h5 class="card-text">{{car.energy}}</h5>
+            <p class="card-descrition">{{car.content}}</p>
+            <p class="card-text">{{car.price}} € par jour</p>
+            Vous devez être inscrit pour reserver en ligne
+            <span>
+                <a href="{{ path('app_login') }}">connexion</a>
+            </span>
+            <span>
+                <a href="{{ path('app_register') }}">inscription</a>
+            </span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+
+
+
+
+
 <div class="pagination">
     {{ knp_pagination_render( cars ) }}
 </div>
