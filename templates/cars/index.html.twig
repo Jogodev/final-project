@@ -8,7 +8,7 @@
 <a href="/cars/{{category.id}}">{{category.name}}</a>
 {% endfor %}
 
-
+<!-- La possibilité de reserver est disponible seulement pour un user connecté -->
 {% if is_granted('ROLE_USER') %}
 <div class="row row-cols-1 row-cols-md-3">
     {% for car in cars %}
@@ -52,13 +52,6 @@
     {% endfor %}
 </div>
 {% endif %}
-
-
-
-
-
-
-
 <div class="pagination">
     {{ knp_pagination_render( cars ) }}
 </div>

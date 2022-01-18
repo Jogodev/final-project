@@ -65,6 +65,11 @@ class BookingsController extends AbstractController
         $bookingForm->handleRequest($request);
 
         if ($bookingForm->isSubmitted() && $bookingForm->isValid()) {
+            //On récupère les data du formulaire pour pouvoir comparé les dates
+            $FormData = $bookingForm->getData();
+
+            $bookStartDate=$FormData->getStartDate();
+            $bookEndDate=$FormData->getStartDate();
 
             //On récupère le user
             $user = $this->getUser();
@@ -72,7 +77,7 @@ class BookingsController extends AbstractController
             $booking->setUser($user)
                 ->setCreatedAt(new \DateTime())
                 ->setCars($car);
-
+            
             $this->em->persist($booking);
             $this->em->flush();
         }
