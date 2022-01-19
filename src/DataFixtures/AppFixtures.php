@@ -21,7 +21,14 @@ class AppFixtures extends Fixture
     {
         $this->hash = $hash;
     }
-
+    
+    /**
+     * Method load Permet de généré des fausses données dans la bdd pour faire des tests
+     *
+     * @param ObjectManager $manager [explicite description]
+     *
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -88,7 +95,7 @@ class AppFixtures extends Fixture
 
             $this->addReference('user_' . $users, $user);
         }
-
+        //Génère des voitures pour la pages vente
         for ($sales = 1; $sales <= 15; $sales++) {
             $sale = new Sales();
             $sale->setTitle($faker->vehicle);
@@ -97,16 +104,16 @@ class AppFixtures extends Fixture
             $sale->setDescription($faker->text(30));
             $manager->persist($sale);
         }
-
+        //Génère des reservations
         for ($bookings = 1; $bookings <= 10; $bookings++) {
             $car = $this->getReference(('car_' . $faker->numberBetween(1, 30)));
             $user = $this->getReference(('user_' . $faker->numberBetween(1, 10)));
             $booking = new Bookings();
             $booking->setUser($user);
             $booking->setCars($car);
-            $booking->setCreatedAt($faker->dateTime());
-            $booking->setStartDate($faker->dateTime());
-            $booking->setEndDate($faker->dateTime());
+            $booking->setCreatedAt($faker->dateTimeInInterval('-6 days', '+4 days', 'Europe/Paris'));
+            $booking->setStartDate($faker->dateTimeBetween('-1 week', '+5 days', 'Europe/Paris'));
+            $booking->setEndDate($faker->dateTimeBetween('-3 days', '+10 days', 'Europe/Paris'));
             $manager->persist($booking);
         }
 

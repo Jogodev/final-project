@@ -8,19 +8,22 @@
 <h3 class="text-center">Réserver la {{car.title}}</h3>
 
 
-<div class="container mt-4">
+<div class="container">
     {{ form_start(bookingForm)}}
-    <div class="form-group">
+    <div class="form-row">
+        <div class="col">
+            {{ form_row(bookingForm.startDate)}}
+            <div class="error">
+                {{ form_errors(bookingForm.startDate)}}
+            </div>
+        </div>
+        <div class="col">{{ form_row(bookingForm.endDate)}}
+        </div>
+        <button class="btn btn-dark">Valider</button>
     </div>
-    <div class="">
-        {{ form_row(bookingForm.startDate)}}
+    {{ form_end(bookingForm)}}
 
-    </div>
-    <div class="">{{ form_row(bookingForm.endDate)}}</div>
-    <div class="">
-        <button class="btn btn-primary">Valider</button>
-    </div>
-    <div class="">{{ form_end(bookingForm)}}</div>
+
 
 </div>
 

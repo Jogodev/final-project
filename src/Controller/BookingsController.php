@@ -16,19 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookingsController extends AbstractController
 
 {
-    
+
     /**
      * em
      *
      * @var EntityManagerInterface
      */
-    private $em;    
+    private $em;
     /**
      * bs
      *
      * @var BookingService
      */
-    private $bs;    
+    private $bs;
     /**
      * br
      *
@@ -68,8 +68,8 @@ class BookingsController extends AbstractController
             //On récupère les data du formulaire pour pouvoir comparé les dates
             $FormData = $bookingForm->getData();
 
-            $bookStartDate=$FormData->getStartDate();
-            $bookEndDate=$FormData->getStartDate();
+            $bookStartDate = $FormData->getStartDate();
+            $bookEndDate = $FormData->getEndDate();
 
             //On récupère le user
             $user = $this->getUser();
@@ -77,9 +77,16 @@ class BookingsController extends AbstractController
             $booking->setUser($user)
                 ->setCreatedAt(new \DateTime())
                 ->setCars($car);
+
             
-            $this->em->persist($booking);
-            $this->em->flush();
+            $bookablesDates = $this->br->findByDate($car, $bookStartDate, $bookEndDate);
+            if ($bookablesDates == true) {
+
+                $this->em->persist($booking);
+                $this->em->flush();
+            } else {
+                $this->addFlash('danger','Ce vehicule est déjà réservé à ces dates');
+            }
         }
 
         return $this->render('bookings/new.html.twig', [

@@ -28,11 +28,15 @@ class Bookings
 
     /**
      * @ORM\Column(type="datetime")
+     * 
+     * @Assert\GreaterThan("today", message="La date de retrait doit être superieur à la date d'aujourd'hui")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
+     * 
+     * @Assert\GreaterThanOrEqual("today", message="La date de retour doit être égal ou superieur à la date de retrait")
      */
     private $endDate;
 
