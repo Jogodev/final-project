@@ -112,7 +112,7 @@ class AppFixtures extends Fixture
             $booking->setUser($user);
             $booking->setCars($car);
             $booking->setCreatedAt($faker->dateTimeInInterval('-6 days', '+4 days', 'Europe/Paris'));
-            $booking->setStartDate($faker->dateTimeBetween('-1 week', '+5 days', 'Europe/Paris'));
+            $booking->setStartDate($faker->dateTimeBetween('-5 days', '+5 days', 'Europe/Paris'));
             $booking->setEndDate($faker->dateTimeBetween('-3 days', '+10 days', 'Europe/Paris'));
             $manager->persist($booking);
         }

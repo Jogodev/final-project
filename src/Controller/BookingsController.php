@@ -57,6 +57,14 @@ class BookingsController extends AbstractController
     #[Route('/bookings/{car}', name: 'new_booking')]
 
 
+    /**
+     * Permet au user connecté de faire une reservation
+     *
+     * @param Request $request [explicite description]
+     * @param Cars $car [explicite description]
+     *
+     * @return Response
+     */
     public function newBooking(Request $request, Cars $car): Response
     {
         $booking = new Bookings();
@@ -78,14 +86,15 @@ class BookingsController extends AbstractController
                 ->setCreatedAt(new \DateTime())
                 ->setCars($car);
 
-            
+
             $bookablesDates = $this->br->findByDate($car, $bookStartDate, $bookEndDate);
-            if ($bookablesDates == true) {
+            if ($bookablesDates == NULL) {
 
                 $this->em->persist($booking);
                 $this->em->flush();
+                $this->redirectToRoute('bookings_show', ['id' => $booking->getId()]);
             } else {
-                $this->addFlash('danger','Ce vehicule est déjà réservé à ces dates');
+                $this->addFlash("danger", "Ce vehicule est déjà réservé à ces dates");
             }
         }
 
@@ -93,6 +102,14 @@ class BookingsController extends AbstractController
             'bookingForm' => $bookingForm->createView(),
             'car' => $car,
             'categories' => $this->bs->categorieslist(),
+        ]);
+    }
+
+    #[Route('/bookings/{id}', name: 'bookings_show')]
+    public function show(Bookings $booking): Response
+    {
+        return $this->render('bookings/show.html.twig', [
+            'booking' => $booking,
         ]);
     }
 }

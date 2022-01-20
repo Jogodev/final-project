@@ -3,6 +3,8 @@
 {% block title %}New{% endblock %}
 
 {% block body %}
+
+
 <h1 class="text-center">Réserver votre véhicule</h1>
 
 <h3 class="text-center">Réserver la {{car.title}}</h3>
@@ -13,18 +15,12 @@
     <div class="form-row">
         <div class="col">
             {{ form_row(bookingForm.startDate)}}
-            <div class="error">
-                {{ form_errors(bookingForm.startDate)}}
-            </div>
         </div>
         <div class="col">{{ form_row(bookingForm.endDate)}}
         </div>
         <button class="btn btn-dark">Valider</button>
     </div>
     {{ form_end(bookingForm)}}
-
-
-
 </div>
 
 

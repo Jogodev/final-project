@@ -22,8 +22,17 @@ class BookingsRepository extends ServiceEntityRepository
     /**
      * @return Boolean
      */
-    
-    public function findByDate($car, $startdate, $enddate): bool
+        
+    /**
+     * Method findByDate
+     *
+     * @param $car $car [explicite description]
+     * @param $startdate $startdate [explicite description]
+     * @param $enddate $enddate [explicite description]
+     *
+     * @return 
+     */
+    public function findByDate($car, $startdate, $enddate)
     {
         $query = $this->createQueryBuilder('b')
             ->andWhere('b.cars = :cars')
@@ -36,8 +45,9 @@ class BookingsRepository extends ServiceEntityRepository
             ->getResult();
         
         ;
-        //dd($query);
-        return $query == true ? true : false;
+        return $query;
+        dd($query);
+        
     }
     
 
