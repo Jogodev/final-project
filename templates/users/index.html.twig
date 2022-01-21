@@ -4,6 +4,11 @@
 
 {% block body %}
 <div class="container">
+    {% for message in app.flashes('message') %}
+    <div class="">
+        {{ message }}
+    </div>
+    {% endfor %}
     <div class="row">
         <h1>Profil de {{ app.user.firstname }} {{ app.user.lastname }}</h1>
     </div>
@@ -12,13 +17,11 @@
         <div class="col">{{ app.user.email }}</div>
     </div>
     <div class="row">
-        <div class="col"><a href="{{path ('users_update')}}" class="btn btn-primary">Modifier le profil</a>></div>     
+        <div class="col"><a href="{{path ('users_update')}}" class="btn btn-primary">Modifier le profil</a>></div>
     </div>
     <div class="row">
-        <div class="col"><a href="{{path ('users_update')}}" class="btn btn-primary">Modifier le profil</a>></div>     
+        <div class="col"><a href="{{path ('users_update_password')}}" class="btn btn-primary">Modifier le profil</a>></div>
     </div>
-
-
     <h2>Vos réservations</h2>
     {% for booking in app.user.bookings %}
 

@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UsersController extends AbstractController
 {
@@ -24,12 +24,20 @@ class UsersController extends AbstractController
      *
      * @var EntityManager
      */
-    private $em;
+    private $em;  
+    
+    /**
+     * hash
+     *
+     * @var UserPasswordHasherInterface
+     */
+    private $hash;
 
-    public function __construct(BookingService $bs, EntityManagerInterface $em)
+    public function __construct(BookingService $bs, EntityManagerInterface $em, UserPasswordHasherInterface $hash)
     {
         $this->bs = $bs;
         $this->em = $em;
+        $this->hash = $hash;
     }
 
     #[Route('/users', name: 'users')]
@@ -60,16 +68,40 @@ class UsersController extends AbstractController
             $this->em->persist($user);
             $this->em->flush();
 
-            $this->addFlash('message', 'Profil mis a jour');
+            $this->addFlash('message', 'Votre profil a bien été mis à jour');
             return $this->redirectToroute('users');
         }
-        return $this->render('users/updateuser.html.twig', [
+        return $this->render('users/updateUser.html.twig', [
             'formUser' => $formUser->createView(),
         ]);
     }
 
 
 
+    #[Route('/users/updatpassword', name: 'users_update_password')]
+    public function updatePassword(Request $request): Response
+    {
+        if($request->isMethod('POST'))
+        {
+            $user = $this->getUser();
+            
+            if($request->request->get('password1') == $request->request->get('password2'))
+            {
+                $user->setPassword($this->hash->HashPassword($user, $request->request->get('password1')));
+                $this->em->flush();
+                $this->addFlash('success', 'Mot de passe mis a jour');
+            } else {
+                $this->addFlash('error', 'Les deux mots de passes ne sont pas identiques');
+            }
+
+
+
+
+        }
+        return $this->render('users/updatePassword.html.twig', [
+            'controller_name' => 'UsersController',
+        ]);
+    }
 
 
 
