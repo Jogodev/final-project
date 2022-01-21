@@ -1,0 +1,51 @@
+{% extends 'users.html.twig' %}
+
+{% block title %}Hello UsersController!{% endblock %}
+
+{% block body %}
+
+<h2>Vos réservations</h2>
+{% for booking in app.user.bookings %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>
+    </tbody>
+</table>
+
+
+{# <div class="row">
+    <div class="col-2">Voiture réserver</div>
+    <div class="col-2"><strong>{{ booking.cars }}</strong></div>
+</div>
+<div class="row">
+    <div class="col">Date de réservation:</div>
+    <div class="col"> du {{ booking.startDate | date("d/m/Y") }} au {{ booking.endDate | date("d/m/Y") }}</div>
+</div> #}
+{% endfor %}
+{% endblock %}

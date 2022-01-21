@@ -1,0 +1,20 @@
+{% extends 'users.html.twig' %}
+
+{% block title %}{{ app.user.firstname }} {{ app.user.lastname }} {% endblock %}
+
+{% block body %}
+<div class="container">
+    {% for message in app.flashes('message') %}
+    <div class="form-error">
+        {{ message }}
+    </div>
+    <div class="row">
+        <h1>Modification du profil</h1>
+    </div>
+    <div class="row">
+        {{form_start(formUser)}}
+        {# <button class="btn btn-dark">Valider</button> #}
+        {{form_end(formUser)}}
+    </div>
+</div>
+{% endblock %}
