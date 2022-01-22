@@ -5,12 +5,12 @@
 
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: sans-serif;
     background: #fafafa;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
+    font-family: sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
@@ -23,14 +23,7 @@ a, a:hover, a:focus {
     transition: all 0.3s;
 }
 
-.navbar {
-    padding: 15px 10px;
-    background: #fff;
-    border: none;
-    border-radius: 0;
-    margin-bottom: 40px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-}
+
 
 .navbar-btn {
     box-shadow: none;
@@ -60,7 +53,7 @@ a, a:hover, a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
+    background: #030d38;
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
@@ -73,7 +66,7 @@ a, a:hover, a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #6d7fcc;
+    background: #030d38;
 }
 
 #sidebar ul.components {
@@ -98,7 +91,7 @@ a, a:hover, a:focus {
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background: #030d38;
 }
 
 
@@ -117,7 +110,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: #030d38;
 }
 
 ul.CTAs {
@@ -142,13 +135,16 @@ a.article, a.article:hover {
     color: #fff !important;
 }
 
-
+.profil{
+    width:100%;
+    text-align:center;
+   
+}
 
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
 #content {
-    width: 100%;
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;

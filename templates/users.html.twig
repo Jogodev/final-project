@@ -7,9 +7,6 @@
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<title>{% block title %}Espace client{% endblock %}</title>
-	</title>
-
-	{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 	{% block stylesheets %}
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
 		integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
@@ -18,67 +15,36 @@
 		href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 	{% endblock %}
 	{{ encore_entry_link_tags('app') }}
-
 </head>
-
 <body>
 	<div class="wrapper">
 		<!-- Sidebar Holder -->
 		<nav id="sidebar">
 			<div class="sidebar-header">
-				<h3>Bootstrap Sidebar</h3>
+				<h3>Espace client</h3>
 			</div>
-
 			<ul class="list-unstyled components">
-				<p>Dummy Heading</p>
 				<li class="active">
-					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+					<a href="{{ path ('home') }}">Acceuil</a>
+					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mon
+						profil</a>
 					<ul class="collapse list-unstyled" id="homeSubmenu">
 						<li>
-							<a href="#">Home 1</a>
+							<a href="{{path ('users_update')}}">Modifier mon profil</a>
 						</li>
 						<li>
-							<a href="#">Home 2</a>
-						</li>
-						<li>
-							<a href="#">Home 3</a>
+							<a href="#">Modifier mon mot de passe</a>
 						</li>
 					</ul>
 				</li>
 				<li>
-					<a href="#">About</a>
-					<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
-						class="dropdown-toggle">Pages</a>
-					<ul class="collapse list-unstyled" id="pageSubmenu">
-						<li>
-							<a href="#">Page 1</a>
-						</li>
-						<li>
-							<a href="#">Page 2</a>
-						</li>
-						<li>
-							<a href="#">Page 3</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">Portfolio</a>
+					<a href="#">Mes réservations</a>
 				</li>
 				<li>
 					<a href="#">Contact</a>
 				</li>
 			</ul>
-
-			<ul class="list-unstyled CTAs">
-				<li>
-					<a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-				</li>
-				<li>
-					<a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-				</li>
-			</ul>
 		</nav>
-
 		<!-- Page Content Holder -->
 		<div id="content">
 			<button type="button" id="sidebarCollapse" class="navbar-btn">
@@ -86,38 +52,40 @@
 				<span></span>
 				<span></span>
 			</button>
+		</div>
+		<div class="profil">
 			{% block body %}{% endblock %}
 		</div>
 		{% include "partials/footer.html.twig" %}
+	</div>
 
 
+	{{ encore_entry_script_tags('app') }}
 
-		{{ encore_entry_script_tags('app') }}
 
-
-		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-			crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-			integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-			crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
-			integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-		<script>
-			$(document).ready(function () {
-				$('#sidebarCollapse').on('click', function () {
-					$('#sidebar').toggleClass('active');
-					$(this).toggleClass('active');
-				});
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js"
+		integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#sidebarCollapse').on('click', function () {
+				$('#sidebar').toggleClass('active');
+				$(this).toggleClass('active');
 			});
-		</script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+		});
+	</script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-		{% block javascripts %}{% endblock %}
+	{% block javascripts %}{% endblock %}
 </body>
 
 </html>
