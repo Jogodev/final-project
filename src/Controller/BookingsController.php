@@ -92,9 +92,10 @@ class BookingsController extends AbstractController
 
                 $this->em->persist($booking);
                 $this->em->flush();
-                $this->redirectToRoute('bookings_show', ['id' => $booking->getId()]);
+                $this->redirectToRoute('users', ['id' => $user], );
+                $this->addFlash("success", "Votre réservation a bien été prise en compte");
             } else {
-                $this->addFlash("danger", "Ce vehicule est déjà réservé à ces dates");
+                $this->addFlash("warning", "Ce vehicule est déjà réservé à ces dates, choisissez d'autres dates ou un autre vehicule");
             }
         }
 

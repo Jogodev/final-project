@@ -8,23 +8,25 @@
 <h1 class="text-center">Réserver votre véhicule</h1>
 
 <h3 class="text-center">Réserver la {{car.title}}</h3>
-
-
 <div class="container">
-    {% for message in app.flashes('message') %}
-        <div class="form-error">
-            {{ message }}
-        </div>
-    {% endfor %}
     {{ form_start(bookingForm)}}
-    <div class="form-row">
+    <div class="form-row align-items-end">
         <div class="col">
             {{ form_row(bookingForm.startDate)}}
         </div>
         <div class="col">{{ form_row(bookingForm.endDate)}}
         </div>
-        <button class="btn btn-dark">Valider</button>
+        <div class="col">
+            <div class="form-group">
+                <button class="btn btn-dark">Valider</button>
+            </div>
+        </div>
     </div>
+    {% for message in app.flashes('warning') %}
+    <div class="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
     {{ form_end(bookingForm)}}
 </div>
 
