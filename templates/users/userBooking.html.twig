@@ -3,16 +3,19 @@
 {% block title %}Hello UsersController!{% endblock %}
 
 {% block body %}
-
+{% for message in app.flashes('message') %}
+<div class="">
+    {{ message }}
+</div>
+{% endfor %}
 <h2>Vos réservations</h2>
-
-
+<br> <br>
 {% for booking in app.user.bookings %}
 <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">Id de votre réservation</th>
+                <th scope="col">N° de votre réservation</th>
                 <th scope="col">Véhicule réservé</th>
                 <th scope="col">Date de retrait</th>
                 <th scope="col">Date de retour</th>
@@ -28,14 +31,5 @@
         </tbody>
     </table>
 </div>
-
-{# <div class="row">
-    <div class="col-2">Voiture réserver</div>
-    <div class="col-2"><strong>{{ booking.cars }}</strong></div>
-</div>
-<div class="row">
-    <div class="col">Date de réservation:</div>
-    <div class="col"> du {{ booking.startDate | date("d/m/Y") }} au {{ booking.endDate | date("d/m/Y") }}</div>
-</div> #}
 {% endfor %}
 {% endblock %}

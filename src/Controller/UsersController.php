@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\UpdatePassword;
 use App\Entity\Users;
 use App\Form\UpdateUserType;
+use App\Form\UpdatePasswordType;
 use App\Services\BookingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -41,7 +43,12 @@ class UsersController extends AbstractController
         $this->hash = $hash;
     }
 
-    #[Route('/users', name: 'users')]
+    #[Route('/users', name: 'users')]    
+    /**
+     * Permet de récupérer les réservation du user
+     *
+     * @return Response
+     */
     public function index(): Response
     {
         return $this->render('users/index.html.twig', [
@@ -51,7 +58,7 @@ class UsersController extends AbstractController
 
     #[Route('/users/update', name: 'users_update')]
     /**
-     * Method pour que l'utilisateur puisse changer son email 
+     * Method pour que l'utilisateur puisse changer certaines information sur son profil
      *
      * @param Request $request [explicite description]
      *
@@ -75,25 +82,33 @@ class UsersController extends AbstractController
             'formUser' => $formUser->createView(),
         ]);
     }
-    // #[Route('/users/updatepassword', name: 'users_update_password')]
-    // public function updatePassword(Request $request): Response
-    // {
-    //     if ($request->isMethod('POST')) {
+    #[Route('/users/updatepassword', name: 'users_update_password')]
+    public function updatePassword(Request $request): Response
+    {
+        $password = new UpdatePassword();
 
-    //         $user = $this->getUser();
+        $formUpdate = $this->createForm(UpdatePasswordType::class, $password);
 
-    //         if ($request->request->get('password1') == $request->request->get('password2')) {
-    //             $user->setPassword($this->hash->HashPassword($user, $request->request->get('password1')));
-    //             $this->em->flush();
-    //             $this->addFlash('success', 'Mot de passe mis a jour');
-    //         } else {
-    //             $this->addFlash('error', 'Les deux mots de passes ne sont pas identiques');
-    //         }
-    //     }
-    //     return $this->render('users/updatePassword.html.twig', [
-    //         'controller_name' => 'UsersController',
-    //     ]);
-    // }
+        $formUpdate->handleRequest($request);
+
+        if ($formUpdate->isSubmitted() && $formUpdate->isValid()) {
+            $formData = $formUpdate->getData();
+            $user = $this->getUser();
+            $newPassword = $formData->getNewPassword();
+            $confirmPassword = $formData->getConfirmPassword();
+
+            if ((!password_verify($password->getCurrentPassword(), $user->getPassword())))
+            {
+                
+                $this->addFlash('error', 'Le mot de passe ne correspond pas au mot de passe actuel');
+            } if($newPassword != $confirmPassword) {
+                $this->addFlash('error', 'Les deux mots de passes ne sont pas identiques');
+            }
+        }
+        return $this->render('users/updatePassword.html.twig', [
+            'formUpdate'=>$formUpdate->createView(),
+        ]);
+    }
 
 
 

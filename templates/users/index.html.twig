@@ -4,8 +4,8 @@
 
 {% block body %}
 <div class="container">
-    {% for message in app.flashes('message') %}
-    <div class="">
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success">
         {{ message }}
     </div>
     {% endfor %}
@@ -20,7 +20,7 @@
 
     </div>
     <h2>Vos réservations</h2>
-
+    
     {% for booking in app.user.bookings %}
     <div class="table-responsive">
         <table class="table table-bordered">

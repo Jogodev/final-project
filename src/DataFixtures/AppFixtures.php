@@ -87,7 +87,7 @@ class AppFixtures extends Fixture
                 $user->setEmail($faker->email);
             }
 
-            $user->setPassword($this->hash->hashPassword($user, '1234'));
+            $user->setPassword($this->hash->hashPassword($user, '123456'));
             $user->setLastname($faker->lastname);
             $user->setFirstname($faker->firstname);
             $user->setIsVerified($faker->numberBetween(0, 1));

@@ -10,12 +10,15 @@
 	{% block stylesheets %}
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
 		integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+		integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 	<link rel="stylesheet" href="{{ asset ("assets/css/user.css") }}">
 	<link rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 	{% endblock %}
 	{{ encore_entry_link_tags('app') }}
 </head>
+
 <body>
 	<div class="wrapper">
 		<!-- Sidebar Holder -->
@@ -26,22 +29,23 @@
 			<ul class="list-unstyled components">
 				<li class="active">
 					<a href="{{ path ('home') }}">Acceuil</a>
-					<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Mon
-						profil</a>
-					<ul class="collapse list-unstyled" id="homeSubmenu">
-						<li>
-							<a href="{{path ('users_update')}}">Modifier mon profil</a>
-						</li>
-						<li>
-							<a href="#">Modifier mon mot de passe</a>
-						</li>
-					</ul>
+				</li>
+				<li>
+					<a href="{{ path ('users') }}">Mon profil</a>
+				</li>
+				<li>
+					<a href="{{path ('users_update')}}">Modifier mon profil</a>
+				</li>
+				<li>
+					<a href="{{path ('users_update_password')}}">Modifier mon mot de passe</a>
+				</li>
+
 				</li>
 				<li>
 					<a href="#">Mes réservations</a>
 				</li>
 				<li>
-					<a href="#">Contact</a>
+					<a href="{{ path ('app_logout') }}">Deconnexion</a>
 				</li>
 			</ul>
 		</nav>

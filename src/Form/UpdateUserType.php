@@ -18,20 +18,26 @@ class UpdateUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('email', EmailType::class, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Email requis'
-                    ])
-                    ], 'attr' => [
-                        'class' => 'form-control',
-                    ],
-                ])
-            ->add('Valider', SubmitType::class)
-            
-        ;
+
+            ->add('lastname', TextType::class, [
+                'required' => true,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Nom',
+                    'class' => 'form-control',
+                ]
+            ])
+            ->add('firstname', TextType::class, [
+                'required' => true,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Prénom',
+                    'class' => 'form-control',
+                ]
+            ])
+            ->add('Valider', SubmitType::class, [
+                'attr' => ['class' => 'btn-primary']
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
