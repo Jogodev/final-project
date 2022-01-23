@@ -18,7 +18,7 @@
         </div>
         <div class="col">
             <div class="form-group">
-                <button class="btn btn-dark">Valider</button>
+                <button id="btnform" class="btn btn-dark">Valider</button>
             </div>
         </div>
     </div>
@@ -28,10 +28,14 @@
     </div>
     {% endfor %}
     {{ form_end(bookingForm)}}
+
+    <div id="recap"></div>
 </div>
 
 
 
+{% block javascripts %}
 
+{% endblock %}
 
 {% endblock %}

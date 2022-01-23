@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}{% for car in cars %} page de la {{ car.title }} {% endfor %}{% endblock %}
+
+{% block body %}
+{% for car in cars %}
+<div class="jumbotron text-center">
+    <h1>{{ car.title }}</h1>
+</div>
+<div class="single">
+    <div class="single-item1">
+        <p>Categorie : {{ car.categories| upper }}</p>
+
+        <p>Carburant : {{ car.energy| upper }}</p>
+
+        <p>Equipement : {{ car.content }}</p>
+
+        <p>Prix par jour : {{ car.price }}€</p>
+        {% if is_granted('ROLE_USER') %}
+        <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
+        {% else %}
+        Vous devez être inscrit pour reserver en ligne
+        <span>
+            <a href="{{ path('app_login') }}">connexion</a>
+        </span>
+        <span>
+            <a href="{{ path('app_register') }}">inscription</a>
+        </span>
+        {% endif %}
+    </div>
+    <div>
+        <img src="{{ car.image }}" alt="image de la {{ car.title }}" class="img-fluid">
+    </div>
+</div>
+
+
+
+{% endfor %}
+
+{% endblock %}

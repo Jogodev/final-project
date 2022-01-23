@@ -90,10 +90,11 @@ class BookingsController extends AbstractController
             $bookablesDates = $this->br->findByDate($car, $bookStartDate, $bookEndDate);
             if ($bookablesDates == NULL) {
 
+                
                 $this->em->persist($booking);
                 $this->em->flush();
                 $this->addFlash("success", "Votre réservation a bien été prise en compte");
-                return $this->redirectToRoute('users');
+                return $this->redirectToRoute('booking_show');
             } else {
                 $this->addFlash("warning", "Ce vehicule est déjà réservé à ces dates, choisissez d'autres dates ou un autre vehicule");
             }

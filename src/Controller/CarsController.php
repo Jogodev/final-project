@@ -60,7 +60,7 @@ class CarsController extends AbstractController
         ]);
     }
 
-    #[Route('/cars/{categId}', name: 'carsbycateg')]
+    #[Route('/categories/{categId}', name: 'carsbycateg')]
     /**
      * Permet d'afficher les vehicule selon la categorie choisi
      *
@@ -84,7 +84,15 @@ class CarsController extends AbstractController
         ]);
     }
 
-    // #[Route('/cars', name: 'cars')]
+    #[Route('/cars/{carId}', name: 'carsbyid')]
+    public function singleCar(int $carId): Response
+    {
+        return $this->render('cars/single.html.twig', [
+            'cars'=> $this->bs->singleCar($carId),
+        ]);
+    }
+
+     // #[Route('/cars', name: 'cars')]
     // public function index(CarsRepository $cars): Response
     // {
     //     return $this->render('cars/index.html.twig', [

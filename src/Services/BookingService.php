@@ -39,5 +39,9 @@ class BookingService
         return $bookingslist;
     }
 
-    
+    public function singleCar(string $car)
+    {
+        $singlecar = $this->em->getRepository(Cars::class)->findBy(['id'=>$car]);
+        return $singlecar;
+    }
 }

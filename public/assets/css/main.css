@@ -1,28 +1,28 @@
 
-#page-contact{
-    
-    
-}
-input, textarea, select {
-    box-shadow:5px 5px 10px #c2bfbf;
-    }
-    input[type=submit] , button[type=button]{
-        background-color: #740505;
-        color: #ddd;
-        font-size: larger;
-        font-weight: 800;
-    }
-input[type=submit]:hover , button[type=button]:hover{
-    background-color: #740505;
-    color: #ddd;
-    font-size: x-large;
-    font-weight: 850;
+/*  Css de la page single  */
 
+.single{
+    justify-content: space-evenly;
+    display: flex;
+    flex-wrap: wrap;
 }
-input[type=submit]:active , button[type=button]:active{
-    background-color: rgb(83, 4, 4);
+.single-item1{
+    font-size: 20px;
+    font-weight: bold;
+}
 
-}
-button[type=button2]:hover{
-    font-size: x-large;
-} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,57 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CarsController!{% endblock %}
+{% block title %}Nos voitures{% endblock %}
 
 {% block body %}
 
 {% for category in categories %}
-<a href="/cars/{{category.id}}">{{category.name}}</a>
+<a href="/categories/{{category.id}}">{{category.name}}</a>
 {% endfor %}
 
 <!-- La possibilité de reserver est disponible seulement pour un user connecté -->
-{% if is_granted('ROLE_USER') %}
+
 <div class="row row-cols-1 row-cols-md-3">
     {% for car in cars %}
     <div class="col mb-4">
         <div class="card">
-            <img src="{{car.image}}" class="card-img-top" alt="...">
+            <img src="{{car.image}}" class="card-img-top" alt="image de la {{car.title}}">
             <div class="card-body">
-            <h3 class="card-title">{{car.title}}</h3>
-            <h4 class="card-text">{{car.categories}}</h4>
-            <h5 class="card-text">{{car.energy}}</h5>
-            <p class="card-descrition">{{car.content}}</p>
-            <p class="card-text">{{car.price}} € par jour</p>
+                <h3 class="card-title">{{car.title}}</h3>
+                <h4 class="card-text">{{car.categories}}</h4>
+                <h5 class="card-text">{{car.energy}}</h5>
+                <p class="card-descrition">{{car.content}}</p>
+                <p class="card-text">{{car.price}}€ par jour</p>
+                <a href="/cars/{{car.id}}" class="btn btn-dark">Plus sur la {{car.title}}</a>
+                {% if is_granted('ROLE_USER') %}
                 <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
+                {% else %}
+                <br>
+                <p>Vous devez être inscrit pour reserver en ligne
+                    <span>
+                        <a href="{{ path('app_login') }}">connexion</a>
+                    </span>
+                    <span>
+                        <a href="{{ path('app_register') }}">inscription</a>
+                    </span></p>               
+                {% endif %}
             </div>
         </div>
-    </div>
+    </div>   
     {% endfor %}
 </div>
-{% else %}
-<div class="row row-cols-1 row-cols-md-3">
-    {% for car in cars %}
-    <div class="col mb-4">
-        <div class="card">
-            <img src="{{car.image}}" class="card-img-top" alt="...">
-            <div class="card-body">
-            <h3 class="card-title">{{car.title}}</h3>
-            <h4 class="card-text">{{car.categories}}</h4>
-            <h5 class="card-text">{{car.energy}}</h5>
-            <p class="card-descrition">{{car.content}}</p>
-            <p class="card-text">{{car.price}} € par jour</p>
-            Vous devez être inscrit pour reserver en ligne
-            <span>
-                <a href="{{ path('app_login') }}">connexion</a>
-            </span>
-            <span>
-                <a href="{{ path('app_register') }}">inscription</a>
-            </span>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
-{% endif %}
+
 <div class="pagination">
     {{ knp_pagination_render( cars ) }}
 </div>
