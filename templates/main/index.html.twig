@@ -3,65 +3,94 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
+<section id="search">
+    <h1></h1>
+    <div class="jumbotron">
+        <div class="container">
+            {{ form_start(formSearch) }}
+            <div class="form-row">
+                <div class="col">
+                    {{ form_row(formSearch.categories) }}
+                </div>
+                <div class="col">
+                    {{ form_row(formSearch.maxPrice) }}
+                </div>
+                <div class="col">
+                    {{ form_row(formSearch.energy) }}
+                </div>
+                <button class="btn btn-dark">Rechercher</button>
+            </div>
+            {{ form_end(formSearch) }}
+        </div>
+    </div>
+    {# Seul le user connecté peut réserver #}
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for car in cars %}
+        <div class="col mb-4">
+            <div class="card">
+                <img src="{{car.image}}" class="card-img-top" alt="image de la {{car.title}}">
+                <div class="card-body">
+                    <h3 class="card-title">{{car.title}}</h3>
+                    <h4 class="card-text">{{car.categories}}</h4>
+                    <h5 class="card-text">{{car.energy | upper}}</h5>
+                    <p class="card-descrition">{{car.content}}</p>
+                    <p class="card-text">{{car.price}}€ par jour</p>
+                    <a href="/cars/{{car.id}}" class="btn btn-dark">Plus sur la {{car.title}}</a>
+                    {% if is_granted('ROLE_USER') %}
+                    <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
+                    {% else %}
+                    <p> Vous devez être inscrit pour reserver en ligne
+                        <span>
+                            <a href="{{ path('app_login') }}">connexion</a>
+                        </span>
+                        <span>
+                            <a href="{{ path('app_register') }}">inscription</a>
+                        </span>
+                    </p>
 
-<div class="jumbotron">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% for message in app.flashes('message') %}
+        <div class="alert" role="alert">
+            {{message}}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination">
+        {{ knp_pagination_render( cars ) }}
+    </div>
+</section>
+<section id="contact">
+    <h1>Contactez-Nous</h1>
     <div class="container">
-        {{ form_start(formSearch) }}
+        {{form_start(contactForm)}}
         <div class="form-row">
-            <div class="col">
-                {{ form_row(formSearch.categories) }}
+            <div class="form-group col-md-6">
+                {{form_label(contactForm.nom)}}
+                {{form_widget(contactForm.nom)}}
             </div>
-            <div class="col">
-                {{ form_row(formSearch.maxPrice) }}
-            </div>
-            <div class="col">
-                {{ form_row(formSearch.energy) }}
-            </div>
-            <button class="btn btn-dark">Rechercher</button>
-        </div>
-        {{ form_end(formSearch) }}
-    </div>
-</div>
-{# Seul le user connecté peut réserver #}
-<div class="row row-cols-1 row-cols-md-3">
-    {% for car in cars %}
-    <div class="col mb-4">
-        <div class="card">
-            <img src="{{car.image}}" class="card-img-top" alt="image de la {{car.title}}">
-            <div class="card-body">
-                <h3 class="card-title">{{car.title}}</h3>
-                <h4 class="card-text">{{car.categories}}</h4>
-                <h5 class="card-text">{{car.energy}}</h5>
-                <p class="card-descrition">{{car.content}}</p>
-                <p class="card-text">{{car.price}}€ par jour</p>
-                <a href="/cars/{{car.id}}" class="btn btn-dark">Plus sur la {{car.title}}</a>
-                {% if is_granted('ROLE_USER') %}
-                <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
-                {% else %}
-                <p> Vous devez être inscrit pour reserver en ligne
-                    <span>
-                        <a href="{{ path('app_login') }}">connexion</a>
-                    </span>
-                    <span>
-                        <a href="{{ path('app_register') }}">inscription</a>
-                    </span></p>
-               
-                {% endif %}
+            <div class="form-group col-md-6">
+                {{form_label(contactForm.email)}}
+                {{form_widget(contactForm.email)}}
             </div>
         </div>
-    </div>   
-    {% endfor %}
-    {% for message in app.flashes('message') %}
-    <div class="alert" role="alert">
-        {{message}}
+        <div class="form-group">
+            {{form_label(contactForm.message)}}
+            {{form_widget(contactForm.message)}}
+        </div>
+        <button class="btn btn-primary">Envoyer</button>
+        {{form_end(contactForm)}}
+    </div>
+    {% for message in app.flashes('warning') %}
+    <div class="alert">
+        {{ message }}
     </div>
     {% endfor %}
-</div>
-<div class="pagination">
-    {{ knp_pagination_render( cars ) }}
-</div>
+</section>
 
-<h1>Nous contacter</h1>
 
 
 {% endblock %}

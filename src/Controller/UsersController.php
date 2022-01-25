@@ -82,33 +82,33 @@ class UsersController extends AbstractController
             'formUser' => $formUser->createView(),
         ]);
     }
-    #[Route('/users/updatepassword', name: 'users_update_password')]
-    public function updatePassword(Request $request): Response
-    {
-        $password = new UpdatePassword();
+    // #[Route('/users/updatepassword', name: 'users_update_password')]
+    // public function updatePassword(Request $request): Response
+    // {
+    //     $password = new UpdatePassword();
 
-        $formUpdate = $this->createForm(UpdatePasswordType::class, $password);
+    //     $formUpdate = $this->createForm(UpdatePasswordType::class, $password);
 
-        $formUpdate->handleRequest($request);
+    //     $formUpdate->handleRequest($request);
 
-        if ($formUpdate->isSubmitted() && $formUpdate->isValid()) {
-            $formData = $formUpdate->getData();
-            $user = $this->getUser();
-            $newPassword = $formData->getNewPassword();
-            $confirmPassword = $formData->getConfirmPassword();
+    //     if ($formUpdate->isSubmitted() && $formUpdate->isValid()) {
+    //         $formData = $formUpdate->getData();
+    //         $user = $this->getUser();
+    //         $newPassword = $formData->getNewPassword();
+    //         $confirmPassword = $formData->getConfirmPassword();
 
-            if ((!password_verify($password->getCurrentPassword(), $user->getPassword())))
-            {
+    //         if ((!password_verify($password->getCurrentPassword(), $user->getPassword())))
+    //         {
                 
-                $this->addFlash('error', 'Le mot de passe ne correspond pas au mot de passe actuel');
-            } if($newPassword != $confirmPassword) {
-                $this->addFlash('error', 'Les deux mots de passes ne sont pas identiques');
-            }
-        }
-        return $this->render('users/updatePassword.html.twig', [
-            'formUpdate'=>$formUpdate->createView(),
-        ]);
-    }
+    //             $this->addFlash('error', 'Le mot de passe ne correspond pas au mot de passe actuel');
+    //         } if($newPassword != $confirmPassword) {
+    //             $this->addFlash('error', 'Les deux mots de passes ne sont pas identiques');
+    //         }
+    //     }
+    //     return $this->render('users/updatePassword.html.twig', [
+    //         'formUpdate'=>$formUpdate->createView(),
+    //     ]);
+    
 
 
 

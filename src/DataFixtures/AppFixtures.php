@@ -69,7 +69,7 @@ class AppFixtures extends Fixture
                 $car->setPrice($faker->randomFloat(2, 100, 200));
             }
             $car->setTitle($faker->vehicle);
-            $car->setContent($faker->words(5, true));
+            $car->setContent($faker->words(10, true));
             $car->setImage('/uploads/images/golf.jpg');
             $car->setEnergy($faker->vehicleFuelType);
 

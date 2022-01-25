@@ -5,9 +5,9 @@ let button = document.getElementById('btnform');
 let startdate = document.getElementById('startdate');
 let enddate = document.getElementById('enddate');
 
-button.addEventListener('click', calcAmont);
+button.addEventListener('click', calcAmount);
 
-function calcAmont(){
+function calcAmount(){
 
 
 

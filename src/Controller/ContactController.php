@@ -33,7 +33,7 @@ class ContactController extends AbstractController
             dd($contactData);
         }
 
-        return $this->render('contact/index.html.twig', [
+        return $this->render('main/index.html.twig', [
             'contactForm' => $contactForm->createView(),
         ]);
     }
