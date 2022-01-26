@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UsersController extends AbstractController
@@ -82,7 +83,8 @@ class UsersController extends AbstractController
             'formUser' => $formUser->createView(),
         ]);
     }
-    // #[Route('/users/updatepassword', name: 'users_update_password')]
+
+    // #[Route('/users/updatepassword', name: 'user_update_password')]
     // public function updatePassword(Request $request): Response
     // {
     //     $password = new UpdatePassword();

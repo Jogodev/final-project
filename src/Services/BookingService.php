@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Entity\Cars;
 use App\Entity\Categories;
 use App\Entity\Bookings;
+use App\Entity\Sales;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -39,9 +40,15 @@ class BookingService
         return $bookingslist;
     }
 
-    public function singleCar(string $car)
+    public function singleCar(int $car)
     {
         $singlecar = $this->em->getRepository(Cars::class)->findBy(['id'=>$car]);
         return $singlecar;
     }
+    public function singleSale(int $sale)
+    {
+        $singlecar = $this->em->getRepository(Sales::class)->findBy(['id'=>$sale]);
+        return $singlecar;
+    }
+
 }

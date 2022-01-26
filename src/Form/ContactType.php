@@ -7,8 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\Length;
 
 class ContactType extends AbstractType
 {
@@ -16,18 +17,41 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
+                'required'=>true,
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
             ->add('email', EmailType::class,  [
+                'required'=>true,
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
-            ->add('message', TextareaType::class,  [
+
+            ->add('sujet', ChoiceType::class,  [
+                'required'=>true,
+                'choices'=>[
+                    'Vente'=>'Vente',
+                    'Location'=>'Location'
+                ],
                 'attr' => [
                     'class' => 'form-control'
+                ]
+            ])
+            ->add('message', TextareaType::class, [
+                'required'=>true,
+                'attr' => [
+                    'class' => 'form-control',
+                    'rows' => 6,
+                ],
+                'constraints' => [
+                    new Length([
+                        'min'=>50,
+                        'minMessage' => 'Votre message doit contenir au minimum 50 caractères',
+                        'max' => 500,
+                        'maxMessage' => 'Votre message ne doit contenir au maximum 500 caractères',
+                    ])
                 ]
             ])
             

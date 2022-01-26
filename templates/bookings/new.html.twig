@@ -1,51 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New{% endblock %}
+{% block title %}Réservation{% endblock %}
 
 {% block body %}
 
 
-<h1 class="text-center">Réserver votre véhicule</h1>
-
-<h3 class="text-center">Réserver la {{car.title}}</h3>
+<h1 class="text-center">Entrer vos dates pour réserver la {{car.title}}</h1>
 <div class="container">
-    {{ form_start(bookingForm)}}
-    <div class="form-row align-items-end">
-        <div class="col">
-            {{ form_row(bookingForm.startDate)}}
-        </div>
-        <div class="col">{{ form_row(bookingForm.endDate)}}
-        </div>
-        <div class="col">
-            <div class="form-group">
-                <button id="btnform" class="btn btn-dark">Valider</button>
+    
+        {{ form_start(bookingForm)}}
+        <div class="form-row align-items-end">
+            <div class="col">
+                {{ form_row(bookingForm.startDate)}}
+            </div>
+            <div class="col">
+                {{ form_row(bookingForm.endDate)}}
+            </div>
+            <div class="col">
+                <div class="">
+                    <button id="btnform" class="btn btn-dark">Valider</button>
+                </div>
             </div>
         </div>
-    </div>
-    {% for message in app.flashes('warning') %}
-    <div class="alert">
-        {{ message }}
-    </div>
-    {% endfor %}
-    {{ form_end(bookingForm)}}
-
+        {% for message in app.flashes('warning') %}
+        <div class="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {{ form_end(bookingForm)}}
+    
     <div id="recap"></div>
 </div>
 
 
 
 {% block javascripts %}
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-	<script>
-		$(document).ready(function () {
-			$('.js-datepicker').datepicker({
-				format: "yyyy-mm-dd",
-				startDate: new Date()
-			})
-		}
-		);
-	</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.js-datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            startDate: new Date(),
+            disableTouchKeyboard: true,
+            
+        })
+    }
+    );
+</script>
 {% endblock %}
 
 {% endblock %}

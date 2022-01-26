@@ -92,7 +92,7 @@ class CarsController extends AbstractController
         ]);
     }
 
-     // #[Route('/cars', name: 'cars')]
+    // #[Route('/cars', name: 'cars')]
     // public function index(CarsRepository $cars): Response
     // {
     //     return $this->render('cars/index.html.twig', [

@@ -1,10 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SaleController!{% endblock %}
+{% block title %}{% for sale in sales %}{{ sale.title }} {% endfor %}{% endblock %}
+
 
 {% block body %}
+{% for sale in sales %}
+<div class="jumbotron text-center">
+    <h1>{{ sale.title }}</h1>
+</div>
+<div class="single">
+    <div class="single-item1">
+        <p>Equipement : {{ sale.description }}</p>
+
+        <p>Prix: {{ sale.price }}€</p>
+    </div>
+    <div>
+        <img src="{{ sale.image }}" alt="image de la {{ sale.title }}" class="img-fluid">
+    </div>
+</div>
 
 
+
+{% endfor %}
 
 
 {% endblock %}

@@ -68,13 +68,17 @@
     <div class="container">
         {{form_start(contactForm)}}
         <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-5">
                 {{form_label(contactForm.nom)}}
                 {{form_widget(contactForm.nom)}}
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-5">
                 {{form_label(contactForm.email)}}
                 {{form_widget(contactForm.email)}}
+            </div>
+            <div class="form-group col-md-2">
+                {{form_label(contactForm.sujet)}}
+                {{form_widget(contactForm.sujet)}}
             </div>
         </div>
         <div class="form-group">
@@ -83,12 +87,16 @@
         </div>
         <button class="btn btn-primary">Envoyer</button>
         {{form_end(contactForm)}}
+        <br>
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+        <div class="alert">
+            {{errormessage}}
+        </div>
     </div>
-    {% for message in app.flashes('warning') %}
-    <div class="alert">
-        {{ message }}
-    </div>
-    {% endfor %}
 </section>
 
 
