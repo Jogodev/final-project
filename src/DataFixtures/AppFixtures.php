@@ -70,7 +70,7 @@ class AppFixtures extends Fixture
             }
             $car->setTitle($faker->vehicle);
             $car->setContent($faker->words(10, true));
-            $car->setImage('/uploads/images/golf.jpg');
+            $car->setImage('/uploads/images/audi.jpg');
             $car->setEnergy($faker->vehicleFuelType);
 
             $manager->persist($car);

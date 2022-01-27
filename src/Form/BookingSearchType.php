@@ -26,27 +26,21 @@ class BookingSearchType extends AbstractType
             //     ]
             // ])
             ->add('categories', EntityType::class, [
-                'label' => false,
                 'required' => false,
-                'class' => Categories::class,
-                
-                
+                'class' => Categories::class,                                
                 'attr' => [
-                    'placeholder' => 'Categorie',
+                    
                     'class' => 'form-control'
                 ],
             ])
             ->add('maxPrice', IntegerType::class, [
                 'required' => false,
-                'label' => false,
                 'attr' => [
-                    'placeholder' => 'Prix max',
                     'class' => 'form-control'
                 ],
             ])
             ->add('energy', ChoiceType::class, [
                 'required' => false,
-                'label'=> false,
                 'attr' => [
                     'placeholder' => 'Carburant',
                     'class' => 'form-control'
@@ -70,8 +64,4 @@ class BookingSearchType extends AbstractType
         ]);
     }
 
-    public function getBlockPrefix()
-    {
-        return '';
-    }
 }

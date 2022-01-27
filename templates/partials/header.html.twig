@@ -1,25 +1,44 @@
 <header class="header">
-    <nav class="nav">
-        <div class="nav-left">
-            <h1><a href="{{ path('home') }}">
-                    <img src="{{asset ('/uploads/images/logo.jpg')}}" alt="Logo de l'entreprise" class="logo"> Carma auto
-                </a></h1>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ path('home') }}">
+            <img src="{{asset ('/uploads/images/logo.jpg')}}" alt="Logo de l'entreprise" class="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                {% if app.user %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('users') }}"> Mon compte</a>
+                </li>
+                {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
-        <label for="btnHamburger" class="btnHamburger"><i class="fas fa-bars"></i></label>
-        <input type="checkbox" id="btnHamburger">
-        <ul>
-            <a href="{{ path('cars') }}">Nos vehicules à louer</a>
-            <a href="{{ path('sales') }}">Nos vehicules en vente</a>
-            {% if app.user %}
-            <a href="{{ path('users') }}"> Mon compte</a>
-            {% else %}
-            <a href="{{ path('app_register') }}">Inscription</a>
-            <a href="{{ path('app_login') }}">Connexion</a>
-            {% endif %}
-        </ul>
     </nav>
-    <div class="jumbotron">
-        <p> Pour toute informations complémentaire n'hesitez pas à nous téléphoner ou remplissez un <span><a href="">formulaire de contact</a></span> nous vous répondrons par mail dans les plus brefs délais</p>
+    <div id="banner" class="jumbotron">
+        <p> Pour toute informations complémentaire n'hesitez pas à nous téléphoner ou remplissez un <span><a
+                    href="">formulaire de contact</a></span> nous vous répondrons par mail dans les plus brefs délais
+        </p>
     </div>
 
 </header>

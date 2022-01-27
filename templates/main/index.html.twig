@@ -3,22 +3,28 @@
 {% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
-<section id="search">
-    <h1></h1>
-    <div class="jumbotron">
+<section>
+    <div class="jumbotron search">
+        <h1>Trouver votre location</h1>
         <div class="container">
             {{ form_start(formSearch) }}
-            <div class="form-row">
+            <div class="form-row align-items-end">
                 <div class="col">
+
                     {{ form_row(formSearch.categories) }}
                 </div>
                 <div class="col">
+
                     {{ form_row(formSearch.maxPrice) }}
                 </div>
                 <div class="col">
+
                     {{ form_row(formSearch.energy) }}
                 </div>
-                <button class="btn btn-dark">Rechercher</button>
+                <div class="form">
+                    <button class="btn btn-dark">Rechercher</button>
+                </div>
+
             </div>
             {{ form_end(formSearch) }}
         </div>
@@ -63,6 +69,27 @@
         {{ knp_pagination_render( cars ) }}
     </div>
 </section>
+<section>
+    <div class="card-group">
+        <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
+                    content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+        <div class="card">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+</section>
 <section id="contact">
     <h1>Contactez-Nous</h1>
     <div class="container">
@@ -98,6 +125,7 @@
         </div>
     </div>
 </section>
+
 
 
 
