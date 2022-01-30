@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
@@ -35,9 +35,14 @@ class UpdateUserType extends AbstractType
                     'class' => 'form-control',
                 ]
             ])
-            ->add('Valider', SubmitType::class, [
-                'attr' => ['class' => 'btn-primary']
-            ]);
+            ->add('tel', TelType::class, [
+                'required' => false,
+                'label' => false,
+                'attr' => [
+                    'placeholder'=>'Telephone',
+                    'class' => 'form-control',
+                ],
+            ]);         
     }
 
     public function configureOptions(OptionsResolver $resolver): void

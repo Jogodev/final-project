@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=UsersRepository::class)
@@ -25,11 +27,13 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="50", maxMessage="")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(max="50", maxMessage="")
      */
     private $lastname;
 
@@ -59,7 +63,13 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $bookings;
 
-    
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     * @Assert\Length(min="10", minMessage="Veullez entrer un numero de téléphone valide", max="10", maxMessage="Veullez entrer un numero de téléphone valide")
+     * @Assert\Regex("#(0)[1-9][0-9]{8}#")
+     */
+    private $tel;
+
 
     public function __construct()
     {
@@ -201,4 +211,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getTel(): ?string
+    {
+        return $this->tel;
+    }
+
+    public function setTel(?string $tel): self
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
+
 }

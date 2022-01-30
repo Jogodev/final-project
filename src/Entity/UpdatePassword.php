@@ -7,12 +7,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class UpdatePassword
 {    
     /**
-     * 
+     *
      */
     private $currentPassword;   
 
     /**
-     *@Assert\Length(min=6, max=40, minMessage="Le mot de passe doit contenir au minimum 6 caractères", maxMessage="")
+     *@Assert\Length(min=6, max=40, minMessage="Le mot de passe doit contenir au minimum 6 caractères", maxMessage="Le mot de passe doit contenir au maximum 1000 caractères")
+     *@Assert\NotEqualTo(propertyPath="currentPassword", message="Le nouveau mot de passe ne peut pas être idenditique a l'ancien mot de passe")
      */
     private $newPassword;  
 

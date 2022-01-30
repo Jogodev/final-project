@@ -52,25 +52,18 @@ class MainController extends AbstractController
         );
         $contactForm = $this->createForm(ContactType::class);
         $contactForm->handleRequest($request);
-        $mess = "";
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {
             $contactData = $contactForm->getData();
+            $mailerService->sendEmail(
+                from: ($contactData['email']),
+                to: ('jonathan.plastivene@gmail.com'),
+                subject: ('email de ' . $contactData['nom'] . ' ' . 'pour une' . ' ' . $contactData['sujet'] . ''),
+                text: ($contactData['message'])
 
-            if (strlen($contactData['message']) < 50) {
-                $mess='Le message doit être superieur à 50 caractères';
-            } elseif (strlen($contactData['message']) > 500) {
-                $mess='Le message doit être inferieur à 500 caractères';
-            } else {
-                $mailerService->sendEmail(
-                    from: ($contactData['email']),
-                    to: ('jonathan.plastivene@gmail.com'),
-                    subject: ('email de ' . $contactData['nom'] . ' ' . 'pour une' . ' ' . $contactData['sujet'] . ''),
-                    text: ($contactData['message'])
-                    
-                );
-                $this->addFlash('success', 'Votre message a bien été envoyé');
-                return $this->redirectToRoute('home');
-            }
+            );
+            $this->addFlash('success', 'Votre message a bien été envoyé');
+            //return $this->redirectToRoute('home');
+
         }
 
         return $this->render('main/index.html.twig', [
@@ -78,17 +71,8 @@ class MainController extends AbstractController
             'formSearch' => $formSearch->createView(),
             'cars' => $cars,
             'contactForm' => $contactForm->createView(),
-            'errormessage' => $mess,
         ]);
     }
-
-
-
-
-
-
-
-
     // #[Route('/', name: 'home')]
     // public function index(): Response
     // {

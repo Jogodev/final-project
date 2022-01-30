@@ -52,7 +52,6 @@ $this->energy = $energy;
 return $this;
 }
 
-
 /**
  * Get the value of maxPrice
  *

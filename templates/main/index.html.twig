@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %}Carma auto{% endblock %}
 
 {% block body %}
 <section>
@@ -24,21 +24,22 @@
                 <div class="form">
                     <button class="btn btn-dark">Rechercher</button>
                 </div>
-
             </div>
             {{ form_end(formSearch) }}
         </div>
     </div>
     {# Seul le user connecté peut réserver #}
     <div class="row row-cols-1 row-cols-md-3">
+
         {% for car in cars %}
+        {% if car is not empty %}
         <div class="col mb-4">
             <div class="card">
                 <img src="{{car.image}}" class="card-img-top" alt="image de la {{car.title}}">
                 <div class="card-body">
                     <h3 class="card-title">{{car.title}}</h3>
                     <h4 class="card-text">{{car.categories}}</h4>
-                    <h5 class="card-text">{{car.energy | upper}}</h5>
+                    <h5 class="card-text">{{car.energy | capitalize}}</h5>
                     <p class="card-descrition">{{car.content}}</p>
                     <p class="card-text">{{car.price}}€ par jour</p>
                     <a href="/cars/{{car.id}}" class="btn btn-dark">Plus sur la {{car.title}}</a>
@@ -53,11 +54,18 @@
                             <a href="{{ path('app_register') }}">inscription</a>
                         </span>
                     </p>
-
                     {% endif %}
+
                 </div>
             </div>
         </div>
+        {% else %}
+        <div class="row">
+            <p>
+                Aucun vehicule ne correspond à votre recherche
+            </p>
+        </div>
+        {% endif %}
         {% endfor %}
         {% for message in app.flashes('message') %}
         <div class="alert" role="alert">
@@ -98,19 +106,23 @@
             <div class="form-group col-md-5">
                 {{form_label(contactForm.nom)}}
                 {{form_widget(contactForm.nom)}}
+                {{form_errors(contactForm.nom)}}
             </div>
             <div class="form-group col-md-5">
                 {{form_label(contactForm.email)}}
                 {{form_widget(contactForm.email)}}
+                {{form_errors(contactForm.email)}}
             </div>
             <div class="form-group col-md-2">
                 {{form_label(contactForm.sujet)}}
                 {{form_widget(contactForm.sujet)}}
+                {{form_errors(contactForm.sujet)}}
             </div>
         </div>
         <div class="form-group">
             {{form_label(contactForm.message)}}
             {{form_widget(contactForm.message)}}
+            {{form_errors(contactForm.message)}}
         </div>
         <button class="btn btn-primary">Envoyer</button>
         {{form_end(contactForm)}}
@@ -120,9 +132,6 @@
             {{ message }}
         </div>
         {% endfor %}
-        <div class="alert">
-            {{errormessage}}
-        </div>
     </div>
 </section>
 

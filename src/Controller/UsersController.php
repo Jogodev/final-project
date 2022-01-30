@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Controller;
-use App\Entity\UpdatePassword;
+
 use App\Entity\Users;
+use App\Entity\UpdatePassword;
 use App\Form\UpdateUserType;
 use App\Form\UpdatePasswordType;
 use App\Services\BookingService;
@@ -11,8 +12,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+
 
 class UsersController extends AbstractController
 {
@@ -44,15 +48,24 @@ class UsersController extends AbstractController
         $this->hash = $hash;
     }
 
-    #[Route('/users', name: 'users')]    
+    #[Route('/users', name: 'users')]
+    
+    public function index(): Response
+    {
+        return $this->render('users/index.html.twig', [
+            
+        ]);
+    }
+
+    #[Route('/users/booking', name: 'users_bookings')]
     /**
      * Permet de récupérer les réservation du user
      *
      * @return Response
      */
-    public function index(): Response
+    public function userBooking(): Response
     {
-        return $this->render('users/index.html.twig', [
+        return $this->render('users/userBooking.html.twig', [
             'booking' => $this->bs->bookingsList(),
         ]);
     }
@@ -76,7 +89,7 @@ class UsersController extends AbstractController
             $this->em->persist($user);
             $this->em->flush();
 
-            $this->addFlash('message', 'Votre profil a bien été mis à jour');
+            $this->addFlash('success', 'Votre profil a bien été mis à jour');
             return $this->redirectToroute('users');
         }
         return $this->render('users/updateUser.html.twig', [
@@ -84,37 +97,43 @@ class UsersController extends AbstractController
         ]);
     }
 
-    // #[Route('/users/updatepassword', name: 'user_update_password')]
-    // public function updatePassword(Request $request): Response
-    // {
-    //     $password = new UpdatePassword();
+    #[Route('/users/updatepassword', name: 'users_update_password')]    
+    /**
+     * Permet a l'utilisateur de changer son mot de passe
+     *
+     * @param Request $request [explicite description]
+     *
+     * @return Response
+     */
+    public function updatePassword(Request $request): Response
+    {
+        $password = new UpdatePassword();
+        
+        $formUpdate = $this->createForm(UpdatePasswordType::class, $password);
 
-    //     $formUpdate = $this->createForm(UpdatePasswordType::class, $password);
+        $formUpdate->handleRequest($request);
 
-    //     $formUpdate->handleRequest($request);
-
-    //     if ($formUpdate->isSubmitted() && $formUpdate->isValid()) {
-    //         $formData = $formUpdate->getData();
-    //         $user = $this->getUser();
-    //         $newPassword = $formData->getNewPassword();
-    //         $confirmPassword = $formData->getConfirmPassword();
-
-    //         if ((!password_verify($password->getCurrentPassword(), $user->getPassword())))
-    //         {
-                
-    //             $this->addFlash('error', 'Le mot de passe ne correspond pas au mot de passe actuel');
-    //         } if($newPassword != $confirmPassword) {
-    //             $this->addFlash('error', 'Les deux mots de passes ne sont pas identiques');
-    //         }
-    //     }
-    //     return $this->render('users/updatePassword.html.twig', [
-    //         'formUpdate'=>$formUpdate->createView(),
-    //     ]);
-    
-
-
-
-
+        if ($formUpdate->isSubmitted() && $formUpdate->isValid()) {
+            $formData = $formUpdate->getData();
+            $user = $this->getUser();
+            $pass=true;
+            if(!password_verify($password->getCurrentPassword(), $user->getPassword())){
+                $formUpdate->get('currentPassword')->addError(new FormError('Le mot de passe actuel ne correspond pas'));           
+            } 
+            else
+            {
+                $newPassword = $this->hash->hashPassword($user, $password->getNewPassword());
+                $user->setPassword($newPassword);
+                $this->em->persist($user);
+                $this->em->flush();
+                $this->addFlash('success', 'Votre mot de passe a bien été mis à jour');
+                return $this->redirectToroute('users');
+            }
+        }
+        return $this->render('users/updatePassword.html.twig', [
+            'formUpdate' => $formUpdate->createView(),
+        ]);
+    }
 
     // #[Route('/users', name: 'users')]
     // public function index(): Response
@@ -123,4 +142,5 @@ class UsersController extends AbstractController
     //         'controller_name' => 'UsersController',
     //     ]);
     // }
+
 }

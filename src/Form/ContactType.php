@@ -43,14 +43,14 @@ class ContactType extends AbstractType
                 'required'=>true,
                 'attr' => [
                     'class' => 'form-control',
-                    'rows' => 6,
+                    'rows' => 5,
                 ],
                 'constraints' => [
                     new Length([
                         'min'=>50,
                         'minMessage' => 'Votre message doit contenir au minimum 50 caractères',
                         'max' => 500,
-                        'maxMessage' => 'Votre message ne doit contenir au maximum 500 caractères',
+                        'maxMessage' => 'Votre message doit contenir au maximum 500 caractères',
                     ])
                 ]
             ])

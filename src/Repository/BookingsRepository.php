@@ -46,7 +46,7 @@ class BookingsRepository extends ServiceEntityRepository
         
         ;
         return $query;
-        dd($query);
+        
         
     }
     

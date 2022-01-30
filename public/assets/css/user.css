@@ -1,7 +1,7 @@
 /*
     DEMO STYLE
 */
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+/* @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"; */
 
 
 body {
@@ -139,6 +139,16 @@ a.article, a.article:hover {
     width:100%;
     text-align:center;
    
+   
+}
+fieldset{
+    border: 2px solid black;
+    padding: 10px;
+    
+}
+.updateform {
+    display: flex;
+    justify-content:center;
 }
 
 /* ---------------------------------------------------

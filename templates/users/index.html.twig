@@ -1,6 +1,6 @@
 {% extends 'users.html.twig' %}
 
-{% block title %}Hello UsersController!{% endblock %}
+{% block title %} {{ app.user.firstname | capitalize}} {{ app.user.lastname | capitalize }} {% endblock %}
 
 {% block body %}
 <div class="container">
@@ -10,50 +10,15 @@
     </div>
     {% endfor %}
     
-        <h1>Profil de {{ app.user.firstname }} {{ app.user.lastname }}</h1>
+        <h1>Profil de {{ app.user.firstname | capitalize}} {{ app.user.lastname | capitalize }}</h1>
     
     <div class="row">
         <div class="col">Email :</div>
         <div class="col">{{ app.user.email }}</div>
     </div>
     <div class="row">
-
+        <div class="col">Telephone :</div>
+        <div class="col">{{ app.user.tel }}</div>
     </div>
-    <h2>Vos réservations</h2>
-    
-    {% for booking in app.user.bookings %}
-    <div class="table-responsive">
-        <table class="table table-bordered">
-
-            <thead>
-                <tr>
-                    <th scope="col">Id de votre réservation</th>
-                    <th scope="col">Véhicule réservé</th>
-                    <th scope="col">Date de retrait</th>
-                    <th scope="col">Date de retour</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">{{ booking.id }}</th>
-                    <td>{{ booking.cars }}</td>
-                    <td>{{ booking.startDate| date("d/m/Y") }}</td>
-                    <td>{{ booking.endDate| date("d/m/Y") }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    {# <div class="row">
-        <div class="col-2">Voiture réserver</div>
-        <div class="col-2"><strong>{{ booking.cars }}</strong></div>
-    </div>
-    <div class="row">
-        <div class="col">Date de réservation:</div>
-        <div class="col"> du {{ booking.startDate | date("d/m/Y") }} au {{ booking.endDate | date("d/m/Y") }}</div>
-    </div> #}
-    {% endfor %}
-
-
 </div>
 {% endblock %}

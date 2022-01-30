@@ -40,6 +40,7 @@ class CarsRepository extends ServiceEntityRepository
             $query = $query->andWhere('c.energy = :energy')
                 ->setParameter('energy', $search->getEnergy());
         }
+        dd($query->getQuery());
         
         return $query->getQuery();
     }
