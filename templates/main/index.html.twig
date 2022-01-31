@@ -30,9 +30,7 @@
     </div>
     {# Seul le user connecté peut réserver #}
     <div class="row row-cols-1 row-cols-md-3">
-
         {% for car in cars %}
-        {% if car is not empty %}
         <div class="col mb-4">
             <div class="card">
                 <img src="{{car.image}}" class="card-img-top" alt="image de la {{car.title}}">
@@ -55,21 +53,8 @@
                         </span>
                     </p>
                     {% endif %}
-
                 </div>
             </div>
-        </div>
-        {% else %}
-        <div class="row">
-            <p>
-                Aucun vehicule ne correspond à votre recherche
-            </p>
-        </div>
-        {% endif %}
-        {% endfor %}
-        {% for message in app.flashes('message') %}
-        <div class="alert" role="alert">
-            {{message}}
         </div>
         {% endfor %}
     </div>

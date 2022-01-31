@@ -50,6 +50,8 @@ class MainController extends AbstractController
             $request->query->getInt('page', 1),
             3
         );
+
+        //Formulaire de contact
         $contactForm = $this->createForm(ContactType::class);
         $contactForm->handleRequest($request);
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {

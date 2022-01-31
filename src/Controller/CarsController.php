@@ -80,11 +80,18 @@ class CarsController extends AbstractController
             'cars' => $cars,
             'carscateg' => $this->bs->carsList($categId),
             'categories' => $this->bs->categoriesList(),
-
+            
         ]);
     }
 
-    #[Route('/cars/{carId}', name: 'carsbyid')]
+    #[Route('/cars/{carId}', name: 'carsbyid')]    
+    /**
+     * Permet de récuperer un seul vehicule
+     *
+     * @param int $carId [id du vehicule]
+     *
+     * @return Response
+     */
     public function singleCar(int $carId): Response
     {
         return $this->render('cars/single.html.twig', [

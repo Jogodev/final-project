@@ -7,45 +7,80 @@
 
 <h1 class="text-center">Entrer vos dates pour réserver la {{car.title}}</h1>
 <div class="container">
-        {{ form_start(bookingForm)}}
-        <div class="form-row align-items-end">
-            <div class="col">
-                {{ form_row(bookingForm.startDate)}}
-            </div>
-            <div class="col">
-                {{ form_row(bookingForm.endDate)}}
-            </div>
-            <div class="col">
-                <div class="">
-                    <button id="btnform" class="btn btn-dark">Valider</button>
-                </div>
+    {{ form_start(bookingForm)}}
+    <div class="form-row align-items-end">
+        <div class="col">
+            {{ form_row(bookingForm.startDate)}}
+        </div>
+        <div class="col">
+            {{ form_row(bookingForm.endDate)}}
+        </div>
+        <div class="col">
+            <div class="">
+                <button id="btnform" class="btn btn-dark">Valider</button>
             </div>
         </div>
-        {# {% for message in app.flashes('warning') %}
-        <div class="alert">
-            {{ message }}
-        </div>
-        {% endfor %} #}
-        {{ form_end(bookingForm)}}
-    
-    <div id="recap"></div>
+    </div>
+    <div class="row">
+
+    </div>
+    {{ form_end(bookingForm)}}
+    <div id="recap">
+        <h4 class="py-3">Montant de la location : <span id="amount"> {{ car.price }} </span> &euro;</h4>
+        <p><span id="days" class="mt-4">1</span> jour(s) à {{ car.price }} €/ jour</p>
+        <button id="btncalc" class="btn btn-dark">Obtenir le prix de ma location</button>
+    </div>
 </div>
 
-
+{% endblock %}
 
 {% block javascripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
+</script>
 <script>
     $(document).ready(function () {
         $('.js-datepicker').datepicker({
             format: "yyyy-mm-dd",
             startDate: new Date(),
             disableTouchKeyboard: true,
-            
-        })
+        });
     }
     );
 </script>
-{% endblock %}
+<script>
+    /* Calcul du prix de la reservation */
+    // On récupère les élements du formulaire
+    let startDateEl = document.getElementById('bookings_startDate');
+    let endDateEl = document.getElementById('bookings_endDate');
+    let amountEl = document.getElementById('amount');
+    let daysEl = document.getElementById('days');
+    let btncalc = document.getElementById('btncalc');
 
+    function calcAmount(startDate, endDate, amount) {
+        //Conversion en timestamp
+        const start = Date.parse(startDate);
+        const end = Date.parse(endDate);
+        let timeToDays = 24 * 60 * 60 * 1000; // 24 hours
+        let interval = end - start;
+        if (interval == 0) {
+            return [1, amount];
+        }
+        let days = interval / timeToDays + 1;
+        return [days, days * amount];
+    }
+
+    function runAmount() {
+        if (!startDateEl.value || !endDateEl.value) return // Ne pas écrire au dessus
+        let [days, amount] = calcAmount(startDateEl.value, endDateEl.value, {{ car.price }});
+    console.log(days, amount);
+    amountEl.innerHTML = amount;
+    daysEl.innerHTML = days;
+    }
+
+    btncalc.addEventListener('click', runAmount);
+
+
+
+
+</script>
 {% endblock %}

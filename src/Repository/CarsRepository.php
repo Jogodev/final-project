@@ -23,7 +23,7 @@ class CarsRepository extends ServiceEntityRepository
     }
 
 
-    public function findByQuery(BookingSearch $search): Query
+    public function findByQuery(BookingSearch $search): array
     {
         $query = $this->createQueryBuilder('c')
             ->orderBy('c.price', 'ASC');
@@ -40,9 +40,10 @@ class CarsRepository extends ServiceEntityRepository
             $query = $query->andWhere('c.energy = :energy')
                 ->setParameter('energy', $search->getEnergy());
         }
-        dd($query->getQuery());
+        //dd($query->getQuery()->getResult());
         
-        return $query->getQuery();
+        
+        return $query->getQuery()->getResult();
     }
 
     // /**
