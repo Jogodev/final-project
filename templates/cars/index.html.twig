@@ -22,9 +22,11 @@
                 <p class="card-descrition">{{car.content}}</p>
                 <p class="card-text">{{car.price}}€ par jour</p>
                 <a href="/cars/{{car.id}}" class="btn btn-dark">Plus sur la {{car.title}}</a>
-                {% if is_granted('ROLE_USER') %}
-                <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
-                {% else %}
+                {% if is_granted('ROLE_USER') and app.user.isVerified == 1 %}
+                    <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
+                    {% elseif  is_granted('ROLE_USER') and app.user.isVerified == 0 %}
+                    <p>Votre email n'est pas vérifié <a href="">renvoyer le mail de confirmation</a></p>
+                    {% else %}
                 <br>
                 <p>Vous devez être inscrit pour reserver en ligne
                     <span>

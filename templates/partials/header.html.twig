@@ -12,12 +12,12 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                {# <li class="nav-item active">
                     <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Link</a>
-                </li>
+                </li> #}
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item active">
@@ -29,6 +29,9 @@
                 {% if app.user %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('users') }}"> Mon compte</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
                 </li>
                 {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item active">
@@ -47,9 +50,7 @@
         </div>
     </nav>
     <div id="banner" class="jumbotron">
-        <p> Pour toute informations complémentaire n'hesitez pas à nous téléphoner ou remplissez un <span><a
-                    href="">formulaire de contact</a></span> nous vous répondrons par mail dans les plus brefs délais
-        </p>
+
     </div>
 
 </header>

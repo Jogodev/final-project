@@ -28,16 +28,17 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('BackOffice');
+            
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Categories', 'fas fa-list', Categories::class);
-        yield MenuItem::linkToCrud('Cars', 'fas fa-car', Cars::class);
-        yield MenuItem::linkToCrud('Bookings', 'fas fa-book', Bookings::class);
-        yield MenuItem::linkToCrud('Users', 'fas fa-user', Users::class);
-        yield MenuItem::linkToCrud('Sales', 'fas fa-credit-card', sales::class);
+        yield MenuItem::linkToCrud('Véhicules', 'fas fa-car', Cars::class);
+        yield MenuItem::linkToCrud('Réservations', 'fas fa-book', Bookings::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', Users::class);
+        yield MenuItem::linkToCrud('Ventes', 'fas fa-credit-card', sales::class);
         yield MenuItem::linkToRoute('Retour au site', 'fas fa-arrow-left', 'home');
     }
 }

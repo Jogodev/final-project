@@ -6,9 +6,10 @@
   .jumbotron{
     margin-top: 0;
     border-radius: 0;
+    background-color: rgb(238, 210, 50);
   }
   #banner{
-    background-color:rgb(240, 71, 10);
+    background-color:grey;
     font-size:larger;
     margin: 0;
   }

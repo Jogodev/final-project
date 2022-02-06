@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
+
 use App\Entity\UpdatePassword;
 use App\Form\UpdateUserType;
 use App\Form\UpdatePasswordType;
+use App\Form\ConfirmType;
 use App\Services\BookingService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,10 +14,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormError;
-use Symfony\Component\Mime\Email;
+use App\Security\EmailVerifier;
+use App\Security\UsersAuthenticator;
+use Symfony\Component\Mime\Address;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-
-
 
 class UsersController extends AbstractController
 {
@@ -41,20 +43,21 @@ class UsersController extends AbstractController
      */
     private $hash;
 
-    public function __construct(BookingService $bs, EntityManagerInterface $em, UserPasswordHasherInterface $hash)
+
+
+    public function __construct(BookingService $bs, EntityManagerInterface $em, UserPasswordHasherInterface $hash, EmailVerifier $emailVerifier)
     {
         $this->bs = $bs;
         $this->em = $em;
         $this->hash = $hash;
+        $this->emailVerifier = $emailVerifier;
     }
 
     #[Route('/users', name: 'users')]
-    
+
     public function index(): Response
     {
-        return $this->render('users/index.html.twig', [
-            
-        ]);
+        return $this->render('users/index.html.twig', []);
     }
 
     #[Route('/users/booking', name: 'users_bookings')]
@@ -97,7 +100,7 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/users/updatepassword', name: 'users_update_password')]    
+    #[Route('/users/updatepassword', name: 'users_update_password')]
     /**
      * Permet a l'utilisateur de changer son mot de passe
      *
@@ -108,7 +111,7 @@ class UsersController extends AbstractController
     public function updatePassword(Request $request): Response
     {
         $password = new UpdatePassword();
-        
+
         $formUpdate = $this->createForm(UpdatePasswordType::class, $password);
 
         $formUpdate->handleRequest($request);
@@ -116,12 +119,10 @@ class UsersController extends AbstractController
         if ($formUpdate->isSubmitted() && $formUpdate->isValid()) {
             $formData = $formUpdate->getData();
             $user = $this->getUser();
-            $pass=true;
-            if(!password_verify($password->getCurrentPassword(), $user->getPassword())){
-                $formUpdate->get('currentPassword')->addError(new FormError('Le mot de passe actuel ne correspond pas'));           
-            } 
-            else
-            {
+            $pass = true;
+            if (!password_verify($password->getCurrentPassword(), $user->getPassword())) {
+                $formUpdate->get('currentPassword')->addError(new FormError('Le mot de passe actuel ne correspond pas'));
+            } else {
                 $newPassword = $this->hash->hashPassword($user, $password->getNewPassword());
                 $user->setPassword($newPassword);
                 $this->em->persist($user);
@@ -135,6 +136,31 @@ class UsersController extends AbstractController
         ]);
     }
 
+    #[Route('/users/confirm', name: 'users_confirm_email')]
+
+
+    public function confirmEmail(): Response
+    {
+        $user = $this->getUser();
+        $message = "Le mail de confirmation vous a été renvoyer";
+        // generate a signed url and email it to the user
+        $this->emailVerifier->sendEmailConfirmation(
+            'app_verify_email',
+            $user,
+            (new TemplatedEmail())
+                ->from(new Address('no-reply@carma-auto.com', 'Confirmation de votre email'))
+                ->to($user->getEmail())
+                ->subject('Confirmer votre email')
+                ->htmlTemplate('registration/confirmation_email.html.twig')
+
+        );
+
+        // do anything else you need here, like send an email
+        return $this->render('users/confirmation.html.twig', [
+            'message' => $message,
+        ]);
+    }
+}
     // #[Route('/users', name: 'users')]
     // public function index(): Response
     // {
@@ -142,5 +168,3 @@ class UsersController extends AbstractController
     //         'controller_name' => 'UsersController',
     //     ]);
     // }
-
-}

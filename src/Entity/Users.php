@@ -66,7 +66,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
      * @Assert\Length(min="10", minMessage="Veullez entrer un numero de téléphone valide", max="10", maxMessage="Veullez entrer un numero de téléphone valide")
-     * @Assert\Regex("#(0)[1-9][0-9]{8}#")
+     * @Assert\Regex("#(0)[1-9][0-9]{8}#", message="Veullez entrer un numero de téléphone valide")
      */
     private $tel;
 

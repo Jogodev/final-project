@@ -32,7 +32,6 @@ class CarsCrudController extends AbstractCrudController
                 ->setUploadDir('/public/uploads/images')
                 ->setRequired(false)
                 ->setBasePath('/uploads'),
-           
         ];
     }
 }

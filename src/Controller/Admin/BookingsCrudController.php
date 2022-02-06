@@ -23,7 +23,6 @@ class BookingsCrudController extends AbstractCrudController
         return [
             IdField::new('id', 'Numero de réservation'),
             AssociationField::new('cars', 'Vehicule')->autocomplete(),
-            AssociationField::new('cars', 'Photo')->autocomplete(),
             DateTimeField::new('start_date', 'Date de retrait'),
             DateTimeField::new('end_date', 'Date de retour'),
             //TextField::new('title'),

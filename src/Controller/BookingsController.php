@@ -86,13 +86,13 @@ class BookingsController extends AbstractController
                 ->setCreatedAt(new \DateTime())
                 ->setCars($car);
 
-
+            //On vérifie dans la bdd si ce véhicule est déjà réserver à ces dates
             $bookablesDates = $this->br->findByDate($car, $bookStartDate, $bookEndDate);
             if ($bookablesDates == NULL) {
 
-                
                 $this->em->persist($booking);
                 $this->em->flush();
+                
                 $this->addFlash("success", "Votre réservation a bien été prise en compte");
                 return $this->redirectToRoute('users');
             } else {

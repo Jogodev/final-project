@@ -115,14 +115,4 @@ class Bookings
         return $this;
     }
     
-    /**
-     * Method bookingDays
-     *  Permet de récuperer le nombre de jours d'une location 
-     * @return void
-     */
-    public function bookingDays($startDate, $endDate, $days = '%a')
-    {
-        $interval=date_diff($startDate, $endDate);
-        return $interval->format($days);
-    }
 }

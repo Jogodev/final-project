@@ -41,8 +41,10 @@
                     <p class="card-descrition">{{car.content}}</p>
                     <p class="card-text">{{car.price}}€ par jour</p>
                     <a href="/cars/{{car.id}}" class="btn btn-dark">Plus sur la {{car.title}}</a>
-                    {% if is_granted('ROLE_USER') %}
+                    {% if is_granted('ROLE_USER') and app.user.isVerified == 1 %}
                     <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
+                    {% elseif  is_granted('ROLE_USER') and app.user.isVerified == 0 %}
+                    <p>Votre email n'est pas vérifié <a href="{{ path ('users_confirm_email') }}">renvoyer le mail de confirmation</a></p>
                     {% else %}
                     <p> Vous devez être inscrit pour reserver en ligne
                         <span>
@@ -60,27 +62,6 @@
     </div>
     <div class="pagination">
         {{ knp_pagination_render( cars ) }}
-    </div>
-</section>
-<section>
-    <div class="card-group">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-                    content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
     </div>
 </section>
 <section id="contact">
