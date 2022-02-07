@@ -36,7 +36,7 @@ class UpdateUserType extends AbstractType
                 ]
             ])
             ->add('tel', TelType::class, [
-                'required' => false,
+                'required' => true,
                 'label' => false,
                 'attr' => [
                     'placeholder'=>'Telephone',

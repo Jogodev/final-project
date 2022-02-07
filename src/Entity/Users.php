@@ -27,13 +27,13 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max="50", maxMessage="")
+     * @Assert\Length(min="2", minMessage="Le prénom doit avoir au minimum 2 caractères", max="50", maxMessage="Le prénom doit avoir au maximun 50 caractères")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(max="50", maxMessage="")
+     * @Assert\Length(min="2", minMessage="Le nom doit avoir au minimum 2 caractères", max="50", maxMessage="Le nom doit avoir au maximun 50 caractères")
      */
     private $lastname;
 
@@ -65,7 +65,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
-     * @Assert\Length(min="10", minMessage="Veullez entrer un numero de téléphone valide", max="10", maxMessage="Veullez entrer un numero de téléphone valide")
+     * @Assert\Length(min="10", max="10", exactMessage="Le numéro de téléphone doit avoir exactement 10 caractères")
      * @Assert\Regex("#(0)[1-9][0-9]{8}#", message="Veullez entrer un numero de téléphone valide")
      */
     private $tel;

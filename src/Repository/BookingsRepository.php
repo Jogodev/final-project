@@ -24,7 +24,7 @@ class BookingsRepository extends ServiceEntityRepository
      */
         
     /**
-     * Method findByDate
+     * Permet 
      *
      * @param $car $car [explicite description]
      * @param $startdate $startdate [explicite description]
