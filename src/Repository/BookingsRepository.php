@@ -37,12 +37,20 @@ class BookingsRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('b')
             ->andWhere('b.cars = :cars')
             ->setParameter('cars',$car)
-            ->andWhere('b.startDate >= :startDate')
-            ->setParameter('startDate', $startdate)
-            ->andWhere('b.endDate <= :endDate')
+            //Si la date de début est avant mais que la date de fin est entre les deux dates
+            ->andWhere('(:startDate >= b.startDate')
+            ->andWhere(':startDate <= b.endDate)')
+            //Si la date de fin est superieur à la date de début mais inférieur à la date de fin
+            ->orWhere('(:endDate >= b.startDate')
+            ->andWhere(':endDate <= b.endDate)')
+            //Si si nos 2 dates sont entre la date de début et la date de fin
+            ->orWhere('(:startDate <= b.startDate')
+            ->andWhere(':endDate >= b.endDate)')
             ->setParameter('endDate', $enddate)
+            ->setParameter('startDate', $startdate)
             ->getQuery()
             ->getResult();
+            //dd($query);
         
         ;
         return $query;
@@ -55,10 +63,24 @@ class BookingsRepository extends ServiceEntityRepository
     public function findOneBySomeField($value): ?Bookings
     {
         return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+            
+    ->andWhere('b.cars = :cars')          
+    ->andWhere('b.startDate >= :startDate')                   
+    ->andWhere('b.endDate <= :endDate')
+    ->orWhere('b.cars = :cars')
+    ->andWhere('b.startDate <= :startDate')  
+    ->andWhere('b.endDate >= :endDate')
+    ->orWhere('b.cars = :cars')
+    ->andWhere('b.startDate >= :startDate')  
+    ->andWhere('b.endDate >= :endDate')
+    ->orWhere('b.cars = :cars')
+    ->andWhere('b.startDate <= :startDate')  
+    ->andWhere('b.endDate <= :endDate')
+    ->setParameter('startDate', $startdate)
+    ->setParameter('endDate', $enddate)
+    ->setParameter('cars',$car)
+    ->getQuery()
+    ->getResult();
         ;
     }
     */
