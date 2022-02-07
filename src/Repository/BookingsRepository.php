@@ -35,17 +35,19 @@ class BookingsRepository extends ServiceEntityRepository
     public function findByDate($car, $startdate, $enddate)
     {
         $query = $this->createQueryBuilder('b')
-            ->andWhere('b.cars = :cars')
-            ->setParameter('cars',$car)
-            //Si la date de début est avant mais que la date de fin est entre les deux dates
+            ->andWhere('b.cars = :cars')           
+            //Si la date de début est superieure ou égal à la date de debut de la bdd mais qu'elle est inferieur à la date de fin           
             ->andWhere('(:startDate >= b.startDate')
             ->andWhere(':startDate <= b.endDate)')
-            //Si la date de fin est superieur à la date de début mais inférieur à la date de fin
+            //Si la date de fin est superieur à la date de début de la bdd mais inférieur ou égal à la date de fin           
             ->orWhere('(:endDate >= b.startDate')
             ->andWhere(':endDate <= b.endDate)')
-            //Si si nos 2 dates sont entre la date de début et la date de fin
+            ->andWhere('b.cars = :cars')
+            //Si nos 2 dates sont entre la date de début et la date de fin de la bdd           
             ->orWhere('(:startDate <= b.startDate')
             ->andWhere(':endDate >= b.endDate)')
+            ->andWhere('b.cars = :cars')
+            ->setParameter('cars',$car)
             ->setParameter('endDate', $enddate)
             ->setParameter('startDate', $startdate)
             ->getQuery()
@@ -58,30 +60,4 @@ class BookingsRepository extends ServiceEntityRepository
         
     }
     
-
-    /*
-    public function findOneBySomeField($value): ?Bookings
-    {
-        return $this->createQueryBuilder('b')
-            
-    ->andWhere('b.cars = :cars')          
-    ->andWhere('b.startDate >= :startDate')                   
-    ->andWhere('b.endDate <= :endDate')
-    ->orWhere('b.cars = :cars')
-    ->andWhere('b.startDate <= :startDate')  
-    ->andWhere('b.endDate >= :endDate')
-    ->orWhere('b.cars = :cars')
-    ->andWhere('b.startDate >= :startDate')  
-    ->andWhere('b.endDate >= :endDate')
-    ->orWhere('b.cars = :cars')
-    ->andWhere('b.startDate <= :startDate')  
-    ->andWhere('b.endDate <= :endDate')
-    ->setParameter('startDate', $startdate)
-    ->setParameter('endDate', $enddate)
-    ->setParameter('cars',$car)
-    ->getQuery()
-    ->getResult();
-        ;
-    }
-    */
 }
