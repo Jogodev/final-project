@@ -28,7 +28,7 @@
             {{ form_end(formSearch) }}
         </div>
     </div>
-    {# Seul le user connecté peut réserver #}
+    {# Seul l'utilisateur connecté peut réserver #}
     <div class="row row-cols-1 row-cols-md-3">
         {% for car in cars %}
         <div class="col mb-4">
@@ -43,6 +43,7 @@
                     <a href="/cars/{{car.id}}" class="btn btn-dark">Plus sur la {{car.title}}</a>
                     {% if is_granted('ROLE_USER') and app.user.isVerified == 1 %}
                     <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
+                    {# Si l'utilisateur n'a pas confirmaé son email il ne pourra pas réservé en ligne #}
                     {% elseif  is_granted('ROLE_USER') and app.user.isVerified == 0 %}
                     <p>Votre email n'est pas vérifié <a href="{{ path ('users_confirm_email') }}">renvoyer le mail de confirmation</a></p>
                     {% else %}

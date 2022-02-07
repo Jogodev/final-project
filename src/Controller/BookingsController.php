@@ -55,8 +55,6 @@ class BookingsController extends AbstractController
     }
 
     #[Route('/bookings/{car}', name: 'new_booking')]
-
-
     /**
      * Permet au user connecté de faire une reservation
      *
@@ -75,13 +73,13 @@ class BookingsController extends AbstractController
         if ($bookingForm->isSubmitted() && $bookingForm->isValid()) {
             //On récupère les data du formulaire pour pouvoir comparé les dates
             $FormData = $bookingForm->getData();
-
+            //On récupère la date de debut et la date de fin
             $bookStartDate = $FormData->getStartDate();
             $bookEndDate = $FormData->getEndDate();
 
             //On récupère le user
             $user = $this->getUser();
-
+            //On initialise les variables dans notre class bookings
             $booking->setUser($user)
                 ->setCreatedAt(new \DateTime())
                 ->setCars($car);

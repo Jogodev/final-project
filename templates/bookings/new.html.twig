@@ -61,22 +61,23 @@
     let btncalc = document.getElementById('btncalc');
 
     function calcAmount(startDate, endDate, amount) {
-        //Conversion en timestamp
+        //Conversion en timestamp pour faire le calcul
         const start = Date.parse(startDate);
         const end = Date.parse(endDate);
-        let timeToDays = 24 * 60 * 60 * 1000; // 24 heures
-        let interval = end - start;
+        let timeToDays = 24 * 60 * 60* 1000; // 1 jour
+        let interval = end - start; //On calcul l'interval entre les deux dates
+        // Si l'utilisateur choisi la même dates pour une réservation d'une journée l'interval sera égal à 0 donc nous l'initialison a 1 jour minimum  
         if (interval == 0) {
             return [1, amount];
         }
-        let days = interval / timeToDays + 1;
+        let days = interval / timeToDays + 1; // Conversion pour avoir le nombre de jour
         return [days, days * amount];
     }
 
     function runAmount() {
-        if (!startDateEl.value || !endDateEl.value) return // Ne pas écrire au dessus
+        if (!startDateEl.value || !endDateEl.value) return // Si les dates dates ne sont pas initialisées le calcul ne se fera pas
         let [days, amount] = calcAmount(startDateEl.value, endDateEl.value, {{ car.price }});
-    console.log(days, amount);
+    // console.log(days, amount);
     // On écrit dans notre élement html en le localisant avec son id
     amountEl.innerHTML = amount;
     daysEl.innerHTML = days;
