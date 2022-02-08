@@ -26,20 +26,22 @@ class BookingSearchType extends AbstractType
             //     ]
             // ])
             ->add('categories', EntityType::class, [
+                'label' => 'Categorie',
                 'required' => false,
                 'class' => Categories::class,                                
-                'attr' => [
-                    
+                'attr' => [                   
                     'class' => 'form-control'
                 ],
             ])
             ->add('maxPrice', IntegerType::class, [
+                'label' => 'Prix max',
                 'required' => false,
                 'attr' => [
                     'class' => 'form-control'
                 ],
             ])
             ->add('energy', ChoiceType::class, [
+                'label' => 'Carburant',
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Carburant',

@@ -2,6 +2,7 @@
 namespace App\Entity;
 
 use App\Entity\Categories;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class BookingSearch{
 
@@ -22,10 +23,10 @@ private $categories;
 
 /**
  * @var int|null
+ * @Assert\GreaterThanOrEqual(20, message="Le prix minimum de nos location est de 20 €")
+ * @Assert\LessThanOrEqual(2000, message="Nos location n'excèdes pas 2000 €")
  */
 private $maxPrice;
-
-
 
 
 /**

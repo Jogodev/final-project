@@ -2,6 +2,7 @@
 * {
   font-family: sans-serif;
   text-decoration: none;
+  list-style:none ;
 }
 
 /* page single  */
@@ -16,9 +17,3 @@
   font-weight: bold;
 }
 
-/*section search*/
-
-.search{
-  /* background-image: url("/uploads/images/route.jpg");
-  background-color: orange; */
-}

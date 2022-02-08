@@ -38,11 +38,11 @@
                     <h3 class="card-title">{{car.title}}</h3>
                     <h4 class="card-text">{{car.categories}}</h4>
                     <h5 class="card-text">{{car.energy | capitalize}}</h5>
-                    <p class="card-descrition">{{car.content}}</p>
+                    <p class="card-descrition">{{car.content|slice(1, 5)}}</p>
                     <p class="card-text">{{car.price}}€ par jour</p>
                     <a href="/cars/{{car.id}}" class="btn btn-dark">Plus sur la {{car.title}}</a>
                     {% if is_granted('ROLE_USER') and app.user.isVerified == 1 %}
-                    <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
+                    <a href="/bookings/{{car.id}}" class="btn btn-light">Réserver ce vehicule</a>
                     {# Si l'utilisateur n'a pas confirmaé son email il ne pourra pas réservé en ligne #}
                     {% elseif  is_granted('ROLE_USER') and app.user.isVerified == 0 %}
                     <p>Votre email n'est pas vérifié <a href="{{ path ('users_confirm_email') }}">renvoyer le mail de confirmation</a></p>
@@ -91,7 +91,7 @@
             {{form_widget(contactForm.message)}}
             {{form_errors(contactForm.message)}}
         </div>
-        <button class="btn btn-primary">Envoyer</button>
+        <button class="btn btn-dark">Envoyer</button>
         {{form_end(contactForm)}}
         <br>
         {% for message in app.flashes('success') %}

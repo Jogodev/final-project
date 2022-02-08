@@ -19,7 +19,7 @@
                 <h3 class="card-title">{{car.title}}</h3>
                 <h4 class="card-text">{{car.categories}}</h4>
                 <h5 class="card-text">{{car.energy}}</h5>
-                <p class="card-descrition">{{car.content}}</p>
+                <p class="card-descrition">{{car.content|slice(1, 2)}}</p>
                 <p class="card-text">{{car.price}}€ par jour</p>
                 <a href="/cars/{{car.id}}" class="btn btn-dark">Plus sur la {{car.title}}</a>
                 {% if is_granted('ROLE_USER') and app.user.isVerified == 1 %}

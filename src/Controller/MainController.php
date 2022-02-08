@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Form\ContactType;
 use App\Services\MailerService;
-
 use App\Repository\CarsRepository;
 use App\Entity\BookingSearch;
 use App\Form\BookingSearchType;
@@ -75,11 +74,4 @@ class MainController extends AbstractController
             'contactForm' => $contactForm->createView(),
         ]);
     }
-    // #[Route('/', name: 'home')]
-    // public function index(): Response
-    // {
-    //     return $this->render('main/index.html.twig', [
-    //         'controller_name' => 'MainController',
-    //     ]);
-    // }
 }

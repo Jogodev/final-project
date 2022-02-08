@@ -11,7 +11,7 @@
             <img src="{{ sale.image }}" class="card-img-top" alt="Photo du modèle de la voiture">
             <div class="card-body">
                 <h5 class="card-title">{{ sale.title }}</h5>
-                <p class="card-text">{{ sale.description|striptags }}</p>
+                <p class="card-text">{{ sale.description|slice(1, 2) }}</p>
                 <a href="/sales/{{sale.id}}" class="btn btn-primary">Plus d'information</a>
             </div>
         </div>

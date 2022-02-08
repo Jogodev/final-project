@@ -18,7 +18,7 @@ class UpdatePassword
     private $newPassword;  
 
     /**
-     *@Assert\EqualTo(propertyPath="newPassword", message ="Le mot de passe n'est pas identique")
+     *@Assert\EqualTo(propertyPath="newPassword", message ="Le mot de passe de confirmation n'est pas identique au nouveau mot de passe")
      */
     private $confirmPassword;
 

@@ -1,5 +1,31 @@
-.footer{
-    display:flex;
-    flex-wrap: wrap;
-    justify-content:space-around;
+.infos {
+  display: flex;
+  justify-content: space-around;
+  /* background-color: rgb(238, 210, 50); */
+  width: 100%;
+  height: auto;
+  flex-wrap: wrap;
+}
+
+.left{
+    display: flex;
+    justify-content: center;
+}
+.middle{
+    display: flex;
+    justify-content: center;
+}
+.right{
+    display: flex;
+    justify-content: center;
+}
+
+.titre-li {
+    font-size:20px;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
