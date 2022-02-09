@@ -1,4 +1,3 @@
-
   .logo{
     width: 70px;
   }
@@ -12,11 +11,9 @@
     border-radius: 0;
     background-color: rgb(238, 210, 50);
   }
-  #banner{
-    background-color:grey;
-    font-size:larger;
-    margin: 0;
+  
+  .nav-item{
+    font-size: 17px;
   }
-  /*----------------bouton hamburger----------------*/
 
 
