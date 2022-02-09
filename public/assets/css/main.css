@@ -12,8 +12,20 @@
   display: flex;
   flex-wrap: wrap;
 }
+
 .single-item1 {
   font-size: 20px;
   font-weight: bold;
 }
 
+.single-item2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.categ{
+  font-size: 20px;
+  color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+}

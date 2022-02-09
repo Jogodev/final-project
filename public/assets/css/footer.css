@@ -1,6 +1,6 @@
 .infos {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   background-color: rgb(238, 210, 50);
   width: 100%;
   margin-top:20px;
@@ -11,15 +11,18 @@
 
 .left{
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 .middle{
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 .right{
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .titre-li {

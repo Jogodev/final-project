@@ -105,7 +105,7 @@ class AppFixtures extends Fixture
             $sale->setTitle($faker->vehicle);
             $sale->setImage("/uploads/images/merco.jpg");
             $sale->setPrice($faker->randomFloat(2, 5000, 15000));
-            $sale->setDescription($faker->text(30));
+            $sale->setDescription($faker->words(15, true));
             $manager->persist($sale);
         }
         // //Génère des reservations

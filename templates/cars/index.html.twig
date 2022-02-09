@@ -6,16 +6,14 @@
 <div class="jumbotron text-center">
     <h1>Tous nos véhicules en location</h1>
 </div>
-
-
-{% for category in categories %}
-
-
-<a href="/categories/{{category.id}}">{{category.name}}</a>
-
-
-{% endfor %}
-
+<h3 class="text-center">Catégories</h3>
+<br>
+<div class="text-center" role="group">
+    {% for category in categories %}
+    <button type="button" class="btn btn-dark"><a class="categ" href="/categories/{{category.id}}">{{category.name}}</a></button>   
+    {% endfor %}
+</div>
+<br><br>
 <!-- La possibilité de reserver est disponible seulement pour un user connecté -->
 
 <div class="row row-cols-1 row-cols-md-3">
@@ -27,14 +25,14 @@
                 <h3 class="card-title">{{car.title}}</h3>
                 <h4 class="card-text">{{car.categories}}</h4>
                 <h5 class="card-text">{{car.energy}}</h5>
-                <p class="card-descrition">{{car.content|slice(1, 2)}}</p>
+                <p class="card-descrition">{{car.content}}</p>
                 <p class="card-text">{{car.price}}€ par jour</p>
                 <a href="/cars/{{car.id}}" class="btn btn-dark">Plus sur la {{car.title}}</a>
                 {% if is_granted('ROLE_USER') and app.user.isVerified == 1 %}
-                    <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
-                    {% elseif  is_granted('ROLE_USER') and app.user.isVerified == 0 %}
-                    <p>Votre email n'est pas vérifié <a href="">renvoyer le mail de confirmation</a></p>
-                    {% else %}
+                <a href="/bookings/{{car.id}}" class="btn btn-primary">Réserver ce vehicule</a>
+                {% elseif is_granted('ROLE_USER') and app.user.isVerified == 0 %}
+                <p>Votre email n'est pas vérifié <a href="">renvoyer le mail de confirmation</a></p>
+                {% else %}
                 <br>
                 <p>Vous devez être inscrit pour reserver en ligne
                     <span>
@@ -42,11 +40,12 @@
                     </span>
                     <span>
                         <a href="{{ path('app_register') }}">inscription</a>
-                    </span></p>               
+                    </span>
+                </p>
                 {% endif %}
             </div>
         </div>
-    </div>   
+    </div>
     {% endfor %}
 </div>
 

@@ -4,8 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="description" content="" />
-	<meta name="author" content="" />
+	<meta name="description" content="Location et vente de véhicule" />
+	<meta name="author" content="Jonathan Plastivène" />
 	<title>{% block title %}Carma auto{% endblock %}</title>
 	</title>
 
@@ -17,21 +17,17 @@
 		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
 		integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-
 	<link rel="stylesheet" href="{{ asset ("assets/css/header.css")}}">
 	<link rel="stylesheet" href="{{ asset ("assets/css/main.css")}}">
 	<link rel="stylesheet" href="{{ asset ("assets/css/footer.css")}}">
 	{% endblock %}
 	{{ encore_entry_link_tags('app') }}
-
 </head>
 
 <body>
 	{% include "partials/header.html.twig" %}
 	{% block body %}{% endblock %}
 	{% include "partials/footer.html.twig" %}
-
-
 
 
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
