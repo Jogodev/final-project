@@ -4,8 +4,9 @@
 
 {% block body %}
 
+<div class="jumbotron"><h1 class="text-center">Entrer vos dates pour réserver la {{car.title}}</h1></div>
 
-<h1 class="text-center">Entrer vos dates pour réserver la {{car.title}}</h1>
+<br><br><br>
 <div class="container">
     {{ form_start(bookingForm)}}
     <div class="form-row align-items-end">
@@ -27,15 +28,14 @@
     </div>
     {% endfor %}
     {{ form_end(bookingForm)}}
+    <br><br>
     <div id="recap">
         <h4 class="py-3">Montant de la location : <span id="amount"> {{ car.price }} € </span></h4>
         <p><span id="days" class="mt-4">1</span> jour(s) à {{ car.price }} €/ jour</p>
         <button id="btncalc" class="btn btn-dark">Obtenir le prix de ma location</button>
     </div>
 </div>
-
-
-
+<br><br><br><br>
 {% endblock %}
 
 {% block javascripts %}
