@@ -3,6 +3,10 @@
     width: 70px;
   }
 
+  .tel{
+    font-size: 25px;
+  }
+
   .search{
     margin-top: 0;
     border-radius: 0;

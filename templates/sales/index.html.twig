@@ -3,7 +3,9 @@
 {% block title %}Hello SaleController!{% endblock %}
 
 {% block body %}
-
+<div class="jumbotron text-center">
+    <h1>Tous nos véhicules en vente</h1>
+</div>
 <div class="row row-cols-1 row-cols-md-3">
     {% for sale in sales %}
     <div class="col mb-4">
@@ -12,7 +14,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ sale.title }}</h5>
                 <p class="card-text">{{ sale.description|slice(1, 2) }}</p>
-                <a href="/sales/{{sale.id}}" class="btn btn-primary">Plus d'information</a>
+                <a href="/sales/{{sale.id}}" class="btn btn-dark">Plus d'information sur la {{sale.title}}</a>
             </div>
         </div>
     </div>

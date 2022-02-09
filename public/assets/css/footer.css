@@ -1,10 +1,12 @@
 .infos {
   display: flex;
   justify-content: space-around;
-  /* background-color: rgb(238, 210, 50); */
+  background-color: rgb(238, 210, 50);
   width: 100%;
+  margin-top:20px;
   height: auto;
   flex-wrap: wrap;
+
 }
 
 .left{
@@ -22,6 +24,11 @@
 
 .titre-li {
     font-size:20px;
+    font-weight:bold;
+}
+
+.reseaux{
+    color: black;
 }
 
 .footer {
