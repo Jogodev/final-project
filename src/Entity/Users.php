@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UsersRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Cette adresse mail existe déjà")
  */
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -28,13 +28,16 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="2", minMessage="Le prénom doit avoir au minimum 2 caractères", max="50", maxMessage="Le prénom doit avoir au maximun 50 caractères")
+     * @Assert\Regex("#^[a-zA-Z éè-]+$#", message="Le prénom ne doit pas contenir de chiffres ou de caractères speciaux")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="2", minMessage="Le nom doit avoir au minimum 2 caractères", max="50", maxMessage="Le nom doit avoir au maximun 50 caractères")
+     * @Assert\Regex("#^[a-zA-Z éè-]+$#", message="Le nom ne doit pas contenir de chiffres ou de caractères speciaux")
      */
+
     private $lastname;
 
     /**
