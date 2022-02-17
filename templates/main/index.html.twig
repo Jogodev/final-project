@@ -4,28 +4,29 @@
 
 {% block body %}
 <section>
-    <div class="jumbotron search">
-        <h1>Trouver votre location</h1>
-        <div class="container">
-            {{ form_start(formSearch) }}
-            <div class="form-row align-items-end">
-                <div class="col">
-
-                    {{ form_row(formSearch.categories) }}
-                </div>
-                <div class="col">
-
-                    {{ form_row(formSearch.maxPrice) }}
-                </div>
-                <div class="col">
-
-                    {{ form_row(formSearch.energy) }}
-                </div>
-                <div class="form">
-                    <button class="btn btn-dark">Rechercher</button>
+    <div class="jumbotron p-5 mb-4 rounded-3 search">
+        <div class="container py-5">
+            <div class="search">
+                <h1 class="display-5 fw-bold">Trouver votre location</h1>
+                <div class="container">
+                    {{ form_start(formSearch) }}
+                    <div class="row align-items-end">
+                        <div class="col">
+                            {{ form_row(formSearch.categories) }}
+                        </div>
+                        <div class="col">
+                            {{ form_row(formSearch.maxPrice) }}
+                        </div>
+                        <div class="col">
+                            {{ form_row(formSearch.energy) }}
+                        </div>
+                        <div class="col">
+                            <button class="btn btn-dark">Rechercher</button>
+                        </div>
+                    </div>
+                    {{ form_end(formSearch) }}
                 </div>
             </div>
-            {{ form_end(formSearch) }}
         </div>
     </div>
     {# Seul l'utilisateur connecté peut réserver #}
@@ -44,8 +45,10 @@
                     {% if is_granted('ROLE_USER') and app.user.isVerified == 1 %}
                     <a href="/bookings/{{car.id}}" class="btn btn-light">Réserver ce vehicule</a>
                     {# Si l'utilisateur n'a pas confirmaé son email il ne pourra pas réservé en ligne #}
-                    {% elseif  is_granted('ROLE_USER') and app.user.isVerified == 0 %}
-                    <p>Votre email n'est pas vérifié <a href="{{ path ('users_confirm_email') }}">renvoyer le mail de confirmation</a></p>
+                    {% elseif is_granted('ROLE_USER') and app.user.isVerified == 0 %}
+                    <p>Votre email n'est pas vérifié <a href="{{ path ('users_confirm_email') }}">renvoyer le mail
+                            de
+                            confirmation</a></p>
                     {% else %}
                     <p> Vous devez être inscrit pour reserver en ligne
                         <span>
@@ -102,7 +105,9 @@
     </div>
 </section>
 
+{% block javascript %}
 
+{% endblock %}
 
 
 {% endblock %}

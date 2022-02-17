@@ -22,7 +22,7 @@ class BookingsRepository extends ServiceEntityRepository
     /**
      * @return Boolean
      */
-        
+
     /**
      * Permet 
      *
@@ -35,7 +35,7 @@ class BookingsRepository extends ServiceEntityRepository
     public function findByDate($car, $startdate, $enddate)
     {
         $query = $this->createQueryBuilder('b')
-            ->andWhere('b.cars = :cars')           
+            ->andWhere('b.cars = :cars')
             //Si la date de début est superieure ou égal à la date de debut de la bdd mais qu'elle est inferieur à la date de fin           
             ->andWhere('(:startDate >= b.startDate')
             ->andWhere(':startDate <= b.endDate)')
@@ -47,17 +47,14 @@ class BookingsRepository extends ServiceEntityRepository
             ->orWhere('(:startDate <= b.startDate')
             ->andWhere(':endDate >= b.endDate)')
             ->andWhere('b.cars = :cars')
-            ->setParameter('cars',$car)
+            ->setParameter('cars', $car)
             ->setParameter('endDate', $enddate)
             ->setParameter('startDate', $startdate)
             ->getQuery()
             ->getResult();
             //dd($query);
-        
+
         ;
         return $query;
-        
-        
     }
-    
 }

@@ -29,7 +29,7 @@ class BookingsType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'form-control js-datepicker'
+                    'class' => 'form-control datepicker'
                 ],
 
             ])
@@ -39,7 +39,7 @@ class BookingsType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => [
-                    'class' => 'form-control js-datepicker'
+                    'class' => 'form-control datepicker'
                 ],
             ]);
     }
