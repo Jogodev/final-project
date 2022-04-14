@@ -65,7 +65,6 @@
     let endDateEl = document.getElementById('bookings_endDate');
     let amountEl = document.getElementById('amount');
     let daysEl = document.getElementById('days');
-    //let btncalc = document.getElementById('btncalc');
 
     function calcAmount(startDate, endDate, amount) {
         //Conversion en timestamp pour faire le calcul
@@ -82,7 +81,6 @@
     }
 
     function runAmount() {
-        console.log('input');
         if (!startDateEl.value || !endDateEl.value) return // Si les dates dates ne sont pas initialisées le calcul ne se fera pas
         let [days, amount] = calcAmount(startDateEl.value, endDateEl.value, {{ car.price }});
     // console.log(days, amount);
@@ -91,9 +89,7 @@
     daysEl.innerHTML = days;
     }
 
-    //btncalc.addEventListener('click', runAmount);
-    // startDateEl.addEventListener('change', runAmount);
-    // endDateEl.addEventListener('change', runAmount);
+    
 
 
 

@@ -106,7 +106,23 @@
 </section>
 
 {% block javascript %}
+<script>
+    let categEl = document.getElementById('booking_search_categories');
+    let priceEl = document.getElementById('booking_search_maxPrice');
+    let energyEl = document.getElementById('booking_search_energy');
 
+    function searchQuery() {
+        document.querySelector('form[name=booking_search]').submit();
+
+    }
+
+    categEl.addEventListener('change', searchQuery)
+    priceEl.addEventListener('change', searchQuery)
+    energyEl.addEventListener('change', searchQuery)
+
+
+
+</script>
 {% endblock %}
 
 
